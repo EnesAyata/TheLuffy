@@ -29,9 +29,10 @@
  */
 #define SCREEN_HEIGHT 480
 /**
- * \brief Taille du bonhomme (sprite)
+ * \brief Moving step
  */
-#define SPRITE_SIZE 32
+ #define MOVING_STEP 5
+
 
 
 

@@ -39,7 +39,7 @@
     SDL_Renderer* rend = SDL_CreateRenderer(win, -1, render_flags);
     
      //load image
-    SDL_Surface* surface = IMG_Load("ressources/Luffy.png") ;
+    SDL_Surface* surface = IMG_Load("ressources/bleu.png") ;
 
     if(!surface){
         printf("erreur surface %s\n", SDL_GetError());
@@ -47,9 +47,21 @@
     //load image data
     SDL_Texture* tex = SDL_CreateTextureFromSurface(rend, surface);
     
+
+    //load sprite image
+    SDL_Surface* pSprite = IMG_Load("ressources/luffy20.png");
+    SDL_Texture* sprTexture = SDL_CreateTextureFromSurface(rend, pSprite);
+    SDL_Rect dest ={640/2 - pSprite->w/2, 480/2- pSprite->h/2, pSprite->w, pSprite->h};
+  
+    //Données du sprite
+
+
     //play music
     Mix_PlayMusic(son,-1);
+    SDL_UpdateWindowSurface(win);
     SDL_FreeSurface(surface);
+    SDL_FreeSurface(pSprite);
+
 
 
         
@@ -59,12 +71,15 @@
 
     //draw the image to the window
     SDL_RenderCopy(rend, tex, NULL,NULL);
+    SDL_RenderCopy(rend, sprTexture, NULL, &dest);
     SDL_RenderPresent(rend);
 
+   
 
     //boucle principale
     while(!terminer){
-        while(SDL_PollEvent(&evenements))
+        while(SDL_PollEvent(&evenements)){
+            
             switch(evenements.type){
                 case SDL_QUIT:
                     terminer = true; break;
@@ -75,7 +90,7 @@
                         terminer = true; break;
                 }
             }
-
+        }
     }
 
 
@@ -85,6 +100,8 @@
     SDL_DestroyWindow(win);
     Mix_FreeMusic(son);
     SDL_Quit();
+
+
       
     return EXIT_SUCCESS;
       
