@@ -52,8 +52,8 @@
     SDL_Surface* pSprite = IMG_Load("ressources/luffy20.png");
     SDL_Texture* sprTexture = SDL_CreateTextureFromSurface(rend, pSprite);
     SDL_Rect dest ={640/2 - pSprite->w/2, 480/2- pSprite->h/2, pSprite->w, pSprite->h};
-  
-    //Données du sprite
+    
+    
 
 
     //play music
@@ -107,3 +107,24 @@
       
     
   }
+
+void deplacerLuffy(int map[][26], SDL_Rect*posi, int direction){
+
+   switch(direction){
+        case 0:
+            posi->y--;
+        break
+        case 1:
+            posi->y++;
+        break
+        case 2:
+            posi->x++;
+        break
+        case 3:
+            posi->x--;
+        break
+        
+
+
+   } 
+}
