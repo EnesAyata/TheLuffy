@@ -32,7 +32,7 @@
     
     //load music
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
-    Mix_Music * son= Mix_LoadMUS("ressources/opening.mp3");
+    Mix_Music * son= Mix_LoadMUS("ressources/opening1.mp3");
 
     //load renderer
     Uint32 render_flags = SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC;
@@ -57,7 +57,7 @@
 
 
     //play music
-    Mix_PlayMusic(son,-1);
+    Mix_PlayMusic(son,-1);//-1 = le son joue a l'infini
     SDL_UpdateWindowSurface(win);
     SDL_FreeSurface(surface);
     SDL_FreeSurface(pSprite);

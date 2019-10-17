@@ -57,6 +57,26 @@ struct world_s{
 };
 typedef struct world_s world_t;
 
+//map
+typedef unsigned char tileindex; 
+ 
+typedef struct 
+{ 
+    SDL_Rect R; 
+    int plein; 
+} TileProp; 
+
+typedef struct 
+{ 
+    int LARGEUR_TILE,HAUTEUR_TILE; 
+    int nbtilesX,nbtilesY; 
+    SDL_Surface* tileset; 
+    TileProp* props; 
+    tileindex** schema; 
+    int nbtiles_largeur_monde,nbtiles_hauteur_monde; 
+} Map;
+
+
 SDL_Surface* load_image(char path[]);
 
 
