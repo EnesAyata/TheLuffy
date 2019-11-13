@@ -10,6 +10,6 @@ void deplacement_Luffy(int dep,SDL_Rect* luffy,SDL_Rect* regard);
 void animation_Luffy(SDL_Rect*anim);
 SDL_Texture* charger_image_transparente(const char* nomfichier,SDL_Renderer* renderer,Uint8 r, Uint8 g, Uint8 b) ;
 
-void detection_col(char** tabJ,char** map,SDL_Rect* luffy);
+int detection_col(char** tabJ,char** map,SDL_Rect* luffy,int direction);
 char** allouer_tab_2D_joueur(int n, int m);
 
