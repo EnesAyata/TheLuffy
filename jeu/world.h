@@ -51,9 +51,10 @@
  /**
  * \brief Structure du world
  */
-struct world_s{
-    SDL_Surface* background;
-    SDL_Surface* img_sprite;
+struct luffy_s{
+    int vie;//vie de luffy
+    int map;//map sur laquelle est luffy
+
 };
 typedef struct world_s world_t;
 
