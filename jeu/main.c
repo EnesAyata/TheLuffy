@@ -1,7 +1,5 @@
-#include <SDL2/SDL.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
+
+
 #include "fonctions_sdl.h"
 int main(int argc, char *argv[])
 {
@@ -9,12 +7,14 @@ int main(int argc, char *argv[])
 // Test lire fichier 
 int n,m;
 
+
 taille_fichier("map.txt",&n,&m);
 printf("taille n : %d et m: %d\n",n,m);
 char** tab2D=lire_fichier("map.txt");
 afficher_tab_2D(tab2D,n,m);
 return 0;
 */
+
 
 
 
@@ -44,7 +44,7 @@ SDL_Quit();
 return EXIT_FAILURE;
 }
 // Créer la fenêtre
-fenetre = SDL_CreateWindow("Fenetre SDL", SDL_WINDOWPOS_CENTERED,
+fenetre = SDL_CreateWindow("TheLuffy", SDL_WINDOWPOS_CENTERED,
 SDL_WINDOWPOS_CENTERED, 640, 640, SDL_WINDOW_RESIZABLE);//taille dynamique avec taille fichier + erreur lors de caract nn autorisé
 if(fenetre == NULL) // En cas d’erreur
 {
@@ -54,10 +54,25 @@ return EXIT_FAILURE;
 }
 //créer un conexte de rendu pr image
 Uint32 render_flags = SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC;
- rend = SDL_CreateRenderer(fenetre, -1, render_flags);
+rend = SDL_CreateRenderer(fenetre, -1, render_flags);
 //charger une image 
   surface = SDL_LoadBMP("sprites.bmp") ;
 
+
+
+  /*int main(int argc, char*argv[]){
+
+    bool terminer = false;
+    SDL_Event evenements;
+
+
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO)!=0){
+        printf("Error initializing SDL: %s\n", SDL_GetError());
+
+    }
+
+    SDL_Window* win = SDL_CreateWindow("Bonjour",SDL_WINDOWPOS_CENTERED,
+    SDL_WINDOWPOS_CENTERED,640, 480, 32);*/
 
 
 
@@ -119,9 +134,29 @@ printf("taille n : %d et m: %d\n",n,m);
  char ** tab2D=lire_fichier("map.txt");
  //verif_tab(tab2D);
 
+
+TTF_Init();
+SDL_Surface *message;
+SDL_Texture *txtmsg;
+SDL_Rect textRect;
+SDL_Color textColor ={0,0,0};
+TTF_Font *font;
+
+font =TTF_OpenFont("ressources/arial.ttf", 20);
+
+message = TTF_RenderText_Solid(font, "Enes le plus beau", textColor);
+//txtmsg= SDL_CreateTextureFromSurface(rend,message);
+textRect.x = 50;
+textRect.y= 150;
+//SDL_BlitSurface(message,NULL,surface,&textRect);
+//createmenu(surface, font, rend);
+    
  
 
  afficher_tab_2D(tab2D,n,m);
+ 
+
+
 
 
 //SDL_Rect** tab= allouer_rect(n,m);
@@ -133,20 +168,23 @@ printf("taille n : %d et m: %d\n",n,m);
 char** tabJ;
 
 
+createmenu(font,rend);
 
 
 //fin col
 // Boucle principale
 while(!terminer)
 {
+    //SDL_RenderCopy(rend, txtmsg, NULL, &textRect);
     
 while( SDL_PollEvent( &evenements ) )
 SDL_RenderClear(rend);
-//SDL_RenderCopy(rend, fond, NULL, NULL);
-
-//SDL_RenderCopy(rend, obj, &SrcR, &DestR);
 afficher_map(tab2D,n,m,rend,tiles);
+//createmenu(font,rend);
 SDL_RenderCopy(rend,luffy,&luffyR,&DestL);
+
+
+SDL_RenderPresent(rend);
 switch(evenements.type)
 {
 case SDL_QUIT:
@@ -158,6 +196,7 @@ case SDLK_ESCAPE:
 case SDLK_q:
 terminer = true; break;
 }
+
 switch (evenements.key.keysym.sym)
 {
   case SDLK_LEFT:  deplacement_Luffy(0,&DestL,&luffyR);animation_Luffy(&luffyR); break;
@@ -167,16 +206,23 @@ switch (evenements.key.keysym.sym)
 }
 
 }
-SDL_RenderPresent(rend);
+
 }
 // Quitter SDL
 SDL_DestroyTexture(fond);
 SDL_DestroyTexture(text);
 SDL_DestroyRenderer(rend); 
 SDL_DestroyWindow(fenetre);
+TTF_CloseFont(font);
+TTF_Quit();
 SDL_Quit();
 return 0;
 
 }
+
+
+
+  
+
 
 
