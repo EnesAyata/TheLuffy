@@ -1,5 +1,6 @@
 #include "fonctions_sdl.h"
 
+
 SDL_Texture* charger_image (const char* nomfichier, SDL_Renderer*renderer) {
     SDL_Surface* surface = SDL_LoadBMP(nomfichier) ;
 
@@ -29,7 +30,7 @@ char** allouer_tab_2D(int n, int m){
     }
     return tab;
 }
-
+/*
 char** allouer_tab_2D_joueur(int n, int m){
     char** tab;
     tab=malloc(n*sizeof(char*));
@@ -43,9 +44,10 @@ char** allouer_tab_2D_joueur(int n, int m){
     }
     return tab;
 }
+*/
 
 int detection_col(char** tabJ,char** map,SDL_Rect* luffy,int direction){
-        tabJ=allouer_tab_2D_joueur(20,20);//ici je mets 20,20 car taille de la map mais faut dynamique (en parametre?)
+        //tabJ=allouer_tab_2D_joueur(20,20);//ici je mets 20,20 car taille de la map mais faut dynamique (en parametre?)
         int a,b;
         a=(luffy->x)/28;
         b=(luffy->y)/28;
@@ -59,13 +61,14 @@ int detection_col(char** tabJ,char** map,SDL_Rect* luffy,int direction){
             break;
         }
         printf("La pos de luffy en a : %d et en b: %d\n ",a,b);
+        return 1;
 }
 
 
 
 SDL_Rect** allouer_rect(int n,int m){
   SDL_Rect** tab;
-  SDL_Rect base={0,0,38,38};
+  SDL_Rect base={0,0,TailleTiles,TailleTiles};
   tab=malloc(n*sizeof(SDL_Rect));
     for(int i = 0; i < n; i++){
         tab[i] = malloc(m*sizeof(SDL_Rect));
@@ -107,6 +110,7 @@ void afficher_tab_2D(char** tab,int n,int m){
 
 }
 
+/*
 void verif_tab(char** tab){
     for(int i=0;i<20;i++){
         for(int j=0;j<20;j++){
@@ -115,17 +119,18 @@ void verif_tab(char** tab){
         }
     }
 }
+*/
 
 void init_rect(SDL_Rect* SrcR,SDL_Rect* DestL){
   SrcR->x=0;
   SrcR->y=0;
-  SrcR->w=32;//largeur objet a recup
-  SrcR->h=32;//hauteur objet a recup
+  SrcR->w=TailleTiles;//largeur objet a recup
+  SrcR->h=TailleTiles;//hauteur objet a recup
 
   DestL->x=0;//position du tiles en x
   DestL->y=0;//position du tiles en y
-  DestL->w=32;
-  DestL->h=32;
+  DestL->w=TailleTiles;
+  DestL->h=TailleTiles;
 
 }
 
@@ -140,80 +145,83 @@ void afficher_map(char** tab,int n,int m,SDL_Renderer* rend,SDL_Texture* tiles){
 
   for(int i=0;i<n;i++){
         for(int j=0;j<m;j++){
+            for(int j=0;j<m;j++){
             cpt=(int)tab[i][j]-33;//tiles a afficher // 33 = 1;
             
 
 
-            /*if(tab[i][j]=='0' || tab[i][j]==' '){
+            if(tab[i][j]==' '){
                 //on affiche de la terre
-                SrcR.x=0;
+                //SrcR.x=0;
                 SDL_RenderCopy(rend,tiles,&SrcR,&DestL);
             }
-            elseù*/ if (cpt>=0 && cpt<16){
-                SrcR.x+=cpt*32;
+            else if (cpt>=0 && cpt<NbTilesLargeur){
+                SrcR.x+=cpt*TailleTiles;
                 //SrcR.y+=32;
                 SDL_RenderCopy(rend,tiles,&SrcR,&DestL);
           //tile.y=40*(j+1);
           //SrcR.x=0;
             }
-            else if(cpt>=16 && cpt<32 ){
-                SrcR.x+=(cpt-16)*32;
-                SrcR.y+=32;
+            else if(cpt>=NbTilesLargeur && cpt<NbTilesLargeur*2 ){
+                SrcR.x+=(cpt-NbTilesLargeur)*TailleTiles;
+                SrcR.y+=TailleTiles;
                 //printf(" le del %d , %d \n ",SrcR.x,SrcR.y);
 
                 SDL_RenderCopy(rend,tiles,&SrcR,&DestL);
 
             }
-            else if(cpt>=32 && cpt<48 ){
-                SrcR.x+=(cpt-32)*32;
-                SrcR.y+=64;
+            else if(cpt>=NbTilesLargeur*2 && cpt<NbTilesLargeur*3 ){
+                SrcR.x+=(cpt-(NbTilesLargeur*2))*TailleTiles;
+                SrcR.y+=TailleTiles*2;
                 SDL_RenderCopy(rend,tiles,&SrcR,&DestL);
             }
-            else if(cpt>=48 && cpt<64 ){
-                SrcR.x+=(cpt-48)*32;
-                SrcR.y+=92;
+            else if(cpt>=NbTilesLargeur*3 && cpt<NbTilesLargeur*4 ){
+                SrcR.x+=(cpt-(NbTilesLargeur*3))*TailleTiles;
+                SrcR.y+=TailleTiles*3;
                 SDL_RenderCopy(rend,tiles,&SrcR,&DestL);
             }
-            else if(cpt>=64 && cpt<80 ){
-                SrcR.x+=(cpt-64)*32;
-                SrcR.y+=128;
+            else if(cpt>=NbTilesLargeur*4 && cpt<NbTilesLargeur*5 ){
+                SrcR.x+=(cpt-(NbTilesLargeur*4))*TailleTiles;
+                SrcR.y+=TailleTiles*4;
                 SDL_RenderCopy(rend,tiles,&SrcR,&DestL);
             }
-            else if(cpt>=80 && cpt<96 ){
-                SrcR.x+=(cpt-80)*32;
-                SrcR.y+=160;
+            else if(cpt>=NbTilesLargeur*5 && cpt<NbTilesLargeur*6 ){
+                SrcR.x+=(cpt-(NbTilesLargeur*5))*TailleTiles;
+                SrcR.y+=TailleTiles*5;
+                SDL_RenderCopy(rend,tiles,&SrcR,&DestL);
+            }
+            else if(cpt>=NbTilesLargeur*6 && cpt<NbTilesLargeur*7 ){
+                SrcR.x+=(cpt-(NbTilesLargeur*6))*TailleTiles;
+                SrcR.y+=TailleTiles*6;
+                SDL_RenderCopy(rend,tiles,&SrcR,&DestL);
+            }
+            else if(cpt>=NbTilesLargeur*7 && cpt<NbTilesLargeur*8){
+                SrcR.x+=(cpt-(NbTilesLargeur*7))*TailleTiles;
+                SrcR.y+=TailleTiles*7;
+                SDL_RenderCopy(rend,tiles,&SrcR,&DestL);
+            }
+            else if(cpt>=NbTilesLargeur*8 && cpt<NbTilesLargeur*9){
+                SrcR.x+=(cpt-(NbTilesLargeur*8))*TailleTiles;
+                SrcR.y+=TailleTiles*8;
+                SDL_RenderCopy(rend,tiles,&SrcR,&DestL);
+            }
+            else if(cpt>=NbTilesLargeur*9 /*&& cpt<NbTilesLargeur*9*/){
+                SrcR.x+=(cpt-(NbTilesLargeur*9))*TailleTiles;
+                SrcR.y+=TailleTiles*9;
                 SDL_RenderCopy(rend,tiles,&SrcR,&DestL);
             }
             SrcR.x=0;
-            DestL.x+=32;
+            DestL.x+=TailleTiles;
             SrcR.y=0;
             
         }
         SrcR.y=0;
         DestL.x=0;
-        DestL.y+=32;//on saute la ligne ""
+        DestL.y+=TailleTiles;//on saute la ligne ""
         
   }
 }
-/*
-SDL_Rect** remplir_rect(char** tab2D,int n,int m){
-  SDL_Rect** tab;
-  
-
-  int nb;
-SDL_Rect base={0,0,32,32};
-  for(int i=0;i<n;i++){
-    for(int j=0;j<m;j++){
-      base.x=(atoi(tab2D[i][j]))*32;
-      tab[i][j]=base;
-      base.x=0;
-    }
-    base.y+=32;
-  }
-  return tab;
 }
-
-*/
 
 void taille_fichier(const char* nomFichier, int * nbLig, int* nbCol){
     FILE* fichier = NULL;
@@ -232,19 +240,6 @@ void taille_fichier(const char* nomFichier, int * nbLig, int* nbCol){
     
      if(fichier!=NULL){
         while(c!=EOF){
-        /*/
-            if(caractActuel=='\n'){
-                tmaxL++;
-                if(tmaxC<tmpC){
-                    tmaxC=tmpC;
-                }
-
-                tmpC=0;
-            }
-
-            tmpC++;
-        */
-
        if(c=='\n'){
             *nbLig=*nbLig+1;
             if(comptLargeur>*nbCol)
@@ -254,19 +249,6 @@ void taille_fichier(const char* nomFichier, int * nbLig, int* nbCol){
        else{comptLargeur=comptLargeur+1;}
         
         c=fgetc(fichier);
-
-        
-
-       /*/
-        if(c==10 || c==13){
-            if(comptLargeur!=0)
-                *nbLig=*nbLig+1;
-            if(comptLargeur>*nbCol)
-                *nbCol=comptLargeur;
-            comptLargeur=0;
-            c=fgetc(fichier);
-        }
-        */
         }
 
 
@@ -278,37 +260,6 @@ void taille_fichier(const char* nomFichier, int * nbLig, int* nbCol){
 
 }
 
-
-int ** lire_fichier_2(const char* nomFichier){
-    int** tab2D= allouer_tab_2D(20,20);
-    int n,m;
-    taille_fichier(nomFichier,&n,&m);
-    FILE* fichier = NULL;
-    fichier=fopen(nomFichier,"r");
-    char c;
-    for(int i=0;i<20;i++){
-        for(int j=0;j<20;j++){
-            if(i<n && j<m){
-                if(c!='\n')
-                    tab2D[i][j]=fgetc(fichier);
-                else
-                {
-                    for(int p=j;p<20;p++)
-                        tab2D[i][j]=0;
-                }
-                
-            }
-            c=fgetc(fichier);
-
-        }
-    }
-
-
-
-
-    fclose(fichier);
-    return tab2D;
-}
 char** lire_fichier(const char* nomFichier){
 
     int i=0,j=0;
@@ -354,7 +305,6 @@ char** modifier_caractere(char** tab, int n, int m, char ancien, char nouveau) {
                 }
             }
     }
-    //desallouer_tab_2D(tab,n);
     return tabl;
 }
 
@@ -373,21 +323,22 @@ void ecrire_fichier(const char* nomFichier, char** tab, int n,int m){
     fclose(fichier);
 }
 
+
 void deplacement_Luffy(int dep,SDL_Rect* luffy,SDL_Rect* regard){
     printf("La pos x de luffy : %d , et y : %d\n",luffy->x,luffy->y);
   switch(dep){
     case 0: if(luffy->x-2>=0)
                 luffy->x-=2;
-            regard->x=40;
-            regard->y=40;break;
+            regard->x=TLuffy;
+            regard->y=TLuffy;break;
     case 1: if(luffy->x+2<=600)
                 luffy->x+=2;
-            regard->x=80;
-            regard->y=80;break;
+            regard->x=TLuffy*2;
+            regard->y=TLuffy*2;break;
     case 2: if(luffy->y-2>=0)
                 luffy->y-=2;
-            regard->x=120;
-            regard->y=120;break;
+            regard->x=TLuffy*3;
+            regard->y=TLuffy*3;break;
     case 3: if(luffy->y+2<=600)
                 luffy->y+=2;
             regard->x=0;
@@ -400,22 +351,8 @@ void animation_Luffy(SDL_Rect*anim){
   Uint32 ticks = SDL_GetTicks();
   Uint32 seconds = ticks / 100;
   Uint32 sprite = seconds % 5;
-  anim->x=sprite*40;
+  anim->x=sprite*25;
   
 }
-/*/
-SDL_Rect[][] initialisation_tiles(const char* nomFichier,char** tab){
-  SDL_Rect[] tableautiles;
-  for(int i=0;i<160;i++){
-    SDL_Rect[i]={i*(i+1),i*(i+1),32,32};
-  }
-  return 
-}
 
-void destroy_tiles(SDL_Rect[] tab){
-  for(int i=0;i<160;i++){
-    
-  }
-}
-/*/
 

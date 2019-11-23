@@ -1,4 +1,12 @@
 #include "menu.h"
+#define TLuffy 25
+#define luffyLarg 5
+#define LuffyHaut 4
+#define LargMap 500
+#define HautMap 500
+#define TailleTiles 25
+#define NbTilesLargeur 10
+#define NbTilesHauteur 10
 
 SDL_Texture* charger_image (const char* nomfichier, SDL_Renderer*renderer) ;
 void ecrire_fichier(const char* nomFichier, char** tab, int n,int m);

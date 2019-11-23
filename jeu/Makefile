@@ -1,4 +1,3 @@
-
 SRC=main.c menu.c fonctions_sdl.c
 HEADERS=fonctions_sdl.h world.h menu.h
 BIN=jeu
