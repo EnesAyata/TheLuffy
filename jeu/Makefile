@@ -1,6 +1,5 @@
-
-SRC=main.c menu.c fonctions_sdl.c
-HEADERS=fonctions_sdl.h world.h menu.h
+SRC=main.c menu.c fonctions_sdl.c collision.c
+HEADERS=fonctions_sdl.h world.h menu.h collision.h
 BIN=jeu
 
 LIBS=-

@@ -35,7 +35,15 @@
  #define MOVING_STEP 5
 
 
+#define TLuffy 25
 
+#define luffyLarg 5
+#define LuffyHaut 4
+#define LargMap 500
+#define HautMap 500
+#define TailleTiles 25
+#define NbTilesLargeur 10
+#define NbTilesHauteur 10
 
 
 
