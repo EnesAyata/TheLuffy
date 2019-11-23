@@ -1,6 +1,7 @@
 #include "fonctions_sdl.h"
 
 
+
 SDL_Texture* charger_image (const char* nomfichier, SDL_Renderer*renderer) {
     SDL_Surface* surface = SDL_LoadBMP(nomfichier) ;
 
@@ -10,22 +11,34 @@ SDL_Texture* charger_image (const char* nomfichier, SDL_Renderer*renderer) {
 
 SDL_Texture* charger_image_transparente(const char* nomfichier,SDL_Renderer* renderer,Uint8 r, Uint8 g, Uint8 b) {
  SDL_Surface* surface = SDL_LoadBMP(nomfichier) ;
-  int i=SDL_SetColorKey(surface, SDL_TRUE, SDL_MapRGB(surface->format, r, g, b));
+  //int i=SDL_SetColorKey(surface, SDL_TRUE, SDL_MapRGB(surface->format, r, g, b));
   return SDL_CreateTextureFromSurface(renderer,surface );
 }
 
 
-  
+char** modif_tableau(char**tab2,luffy_t* luffy){
+    char** tab=allouer_tab_2D(20,20);
+    if(luffy->map==1){
+        tab=lire_fichier("map.txt");
+    }
+    if(luffy->map==2){
+        tab=lire_fichier("map.txt");
+    }
+    free(tab2);
+    return tab;
+
+}
   
 char** allouer_tab_2D(int n, int m){
     char** tab;
+    //char init=;
     tab=malloc(n*sizeof(char*));
     for(int i = 0; i < n; i++){
         tab[i] = malloc(m*sizeof(char*));
     }
     for(int i=0;i<n;i++){
         for(int j=0;j<m;j++){
-            tab[i][j]='!';
+            tab[i][j]='&';
         }
     }
     return tab;
@@ -46,23 +59,6 @@ char** allouer_tab_2D_joueur(int n, int m){
 }
 */
 
-int detection_col(char** tabJ,char** map,SDL_Rect* luffy,int direction){
-        //tabJ=allouer_tab_2D_joueur(20,20);//ici je mets 20,20 car taille de la map mais faut dynamique (en parametre?)
-        int a,b;
-        a=(luffy->x)/28;
-        b=(luffy->y)/28;
-        switch (direction)
-        {
-        case 1:
-            /* code */
-            break;
-        
-        default:
-            break;
-        }
-        printf("La pos de luffy en a : %d et en b: %d\n ",a,b);
-        return 1;
-}
 
 
 
@@ -73,7 +69,7 @@ SDL_Rect** allouer_rect(int n,int m){
     for(int i = 0; i < n; i++){
         tab[i] = malloc(m*sizeof(SDL_Rect));
     }
-    for(int i=0;i<n;i++){
+    for(int i=0;i<n;i++){ 
         for(int j=0;j<m;j++){
             tab[i][j]=base;
         }
@@ -145,7 +141,6 @@ void afficher_map(char** tab,int n,int m,SDL_Renderer* rend,SDL_Texture* tiles){
 
   for(int i=0;i<n;i++){
         for(int j=0;j<m;j++){
-            for(int j=0;j<m;j++){
             cpt=(int)tab[i][j]-33;//tiles a afficher // 33 = 1;
             
 
@@ -221,7 +216,7 @@ void afficher_map(char** tab,int n,int m,SDL_Renderer* rend,SDL_Texture* tiles){
         
   }
 }
-}
+
 
 void taille_fichier(const char* nomFichier, int * nbLig, int* nbCol){
     FILE* fichier = NULL;
@@ -232,9 +227,9 @@ void taille_fichier(const char* nomFichier, int * nbLig, int* nbCol){
     fichier=fopen(nomFichier,"r");
     char c= fgetc(fichier);
 
-    int caractActuel=0;
+    //int caractActuel=0;
 
-    int tmaxC=0,tmaxL=0,tmpC=0;
+    //int tmaxC=0,tmaxL=0,tmpC=0;
 
 
     
@@ -323,28 +318,34 @@ void ecrire_fichier(const char* nomFichier, char** tab, int n,int m){
     fclose(fichier);
 }
 
-
-void deplacement_Luffy(int dep,SDL_Rect* luffy,SDL_Rect* regard){
-    printf("La pos x de luffy : %d , et y : %d\n",luffy->x,luffy->y);
+void deplacement_Luffy(int dep,SDL_Rect* luffy,SDL_Rect* regard, char** map){
+    //printf("La c'est : %d",detect_col(luffy,map,dep));
+   // printf("Le car a droite : %c \n" , map[(luffy->y+6)/31][(luffy->x/31)+1]);
+    // if((luffy->x/30)!=0)
+    //int posX=luffy->x/22,posY=(luffy->y)/22;
+    //    printf("le carac a guche: %c ",map[(luffy->x/30)-1][(luffy->y/30)]);
+    detect_col(luffy,map,dep);
   switch(dep){
-    case 0: if(luffy->x-2>=0)
+    case 0: if(luffy->x-2>=0 && detect_col(luffy,map,dep)==0  )//&& map[(((luffy->y+30)/31))][(luffy->x/31)]!='+'/*&& detection_col(map,&luffy,dep)==1*/)
                 luffy->x-=2;
             regard->x=TLuffy;
             regard->y=TLuffy;break;
-    case 1: if(luffy->x+2<=600)
+    case 1: if(luffy->x+2<=500-20 && detect_col(luffy,map,dep)==0)//&& map[(((luffy->y+2)/28))][(luffy->x/28)]!='+'/* && map[(luffy->y/31)][(luffy->x/31)]!='+' */)
                 luffy->x+=2;
             regard->x=TLuffy*2;
             regard->y=TLuffy*2;break;
-    case 2: if(luffy->y-2>=0)
+    case 2: if(luffy->y-2>=0 && detect_col(luffy,map,dep)==0)//&& map[((luffy->y))/32][(luffy->x)/32]!='+' /*&& map[(luffy->y/32)][(luffy->x/32)]!='+'*/)
                 luffy->y-=2;
             regard->x=TLuffy*3;
             regard->y=TLuffy*3;break;
-    case 3: if(luffy->y+2<=600)
+    case 3: if(luffy->y+2<=500-20 && detect_col(luffy,map,dep)==0)//&& map[((luffy->y))/32][((luffy->x-20)/32)]!='+' /*&& map[(luffy->y/32)][(luffy->x/32)]!='+'*/)
                 luffy->y+=2;
             regard->x=0;
             regard->y=0;break;
   }
+  return ;
 }
+
 
 void animation_Luffy(SDL_Rect*anim){
     
@@ -352,7 +353,7 @@ void animation_Luffy(SDL_Rect*anim){
   Uint32 seconds = ticks / 100;
   Uint32 sprite = seconds % 5;
   anim->x=sprite*25;
-  
 }
+
 
 

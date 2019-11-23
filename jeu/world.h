@@ -35,7 +35,15 @@
  #define MOVING_STEP 5
 
 
+#define TLuffy 25
 
+#define luffyLarg 5
+#define LuffyHaut 4
+#define LargMap 500
+#define HautMap 500
+#define TailleTiles 25
+#define NbTilesLargeur 10
+#define NbTilesHauteur 10
 
 
 
@@ -43,8 +51,11 @@
  * \brief Structure du sprite pricipal (luffy)
  */
  struct luffy_s {
-     SDL_Rect luffy;
-     SDL_Rect animationLuffy;
+     int map;//la map ou est luffy
+     int vie;//les pdv de luffy
+     int atk;//l'atk de luffy
+     int experience;//l'xp de luffy
+     int argent;//l'argent de luffy
  };
  typedef struct luffy_s luffy_t;
 

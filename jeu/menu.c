@@ -2,7 +2,7 @@
 
 
 void createmenu(TTF_Font* font, SDL_Renderer* rend){
-        Uint32 time;
+        //Uint32 time;
         int x, y; //event motion
         
         bool boolMenu = false;
@@ -17,11 +17,11 @@ void createmenu(TTF_Font* font, SDL_Renderer* rend){
         SDL_Surface* menu2;
         
         SDL_Color color1 = {255,255,255};
-        SDL_Color color2={255,0,0};//couleurs blanche et rouge pour le menu
+        //SDL_Color color2={255,0,0};//couleurs blanche et rouge pour le menu
  
         menu1 = TTF_RenderText_Solid(font,label1,color1);//création TTF
         menu2 = TTF_RenderText_Solid(font,label2,color1);
-        SDL_Rect pos1, pos2 , dest;
+        SDL_Rect pos1, pos2, dest;
 
         dest.x=0;
         dest.y=0;
@@ -29,7 +29,7 @@ void createmenu(TTF_Font* font, SDL_Renderer* rend){
         dest.h=480;
 
 
-        bool selected=0;
+        //bool selected=0;
         
         //positionnement du texte
         
