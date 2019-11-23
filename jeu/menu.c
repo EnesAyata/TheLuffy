@@ -6,8 +6,16 @@ void createmenu(TTF_Font* font, SDL_Renderer* rend){
         int x, y; //event motion
         
         bool boolMenu = false;
-        char* label1 = "Play";
-        char* label2 ="Exit";
+        
+        char* label1= malloc(sizeof(char));
+        char* label2= malloc(sizeof(char));
+        label1 = "Play";
+        label2 ="Exit";
+
+        //load music
+    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+    Mix_Music * son= Mix_LoadMUS("ressources/opening1.mp3");
+    Mix_PlayMusic(son,-1);//-1 = le son joue a l'infini
 
 
 
@@ -21,20 +29,9 @@ void createmenu(TTF_Font* font, SDL_Renderer* rend){
  
         menu1 = TTF_RenderText_Solid(font,label1,color1);//création TTF
         menu2 = TTF_RenderText_Solid(font,label2,color1);
-        SDL_Rect pos1, pos2 , dest;
-
-        dest.x=0;
-        dest.y=0;
-        dest.w=640;
-        dest.h=480;
-
+        SDL_Rect pos1, pos2 ;
 
         bool selected=0;
-        
-        //positionnement du texte
-        
-         
-
 
         //textures du menu
         SDL_Texture* menuTex1;
@@ -42,16 +39,18 @@ void createmenu(TTF_Font* font, SDL_Renderer* rend){
         menuTex1= SDL_CreateTextureFromSurface(rend, menu1);
         menuTex2 = SDL_CreateTextureFromSurface(rend, menu2);
 
+
+        //positionnement du texte
         int menu1w, menu1h, menu2w, menu2h;
         SDL_QueryTexture(menuTex1, NULL, NULL, &menu1w, &menu1h);
-        pos1.x = 300;
-        pos1.y = 240;
+        pos1.x = 640/2;
+        pos1.y = 480/2;
         pos1.w = menu1w;
         pos1.h=menu1h;
 
         SDL_QueryTexture(menuTex2, NULL, NULL, &menu2w, &menu2h);
-        pos2.x = 300;
-        pos2.y = 260;
+        pos2.x = 640/2;
+        pos2.y = 275;
         pos2.w = menu2w;
         pos2.h=menu2h;
 
@@ -178,6 +177,7 @@ void createmenu(TTF_Font* font, SDL_Renderer* rend){
   
         SDL_FreeSurface(menu1);
         SDL_FreeSurface(menu2);
+        Mix_FreeMusic(son);
         SDL_DestroyTexture(menuTex1);
         SDL_DestroyTexture(menuTex2);
 
