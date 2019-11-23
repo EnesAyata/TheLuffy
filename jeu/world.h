@@ -40,24 +40,24 @@
 
 
  /**
- * \brief Structure du sprite pricipal
+ * \brief Structure du sprite pricipal (luffy)
  */
- struct sprite_s {
-     double sprite_x;
-     double sprite_y;
+ struct luffy_s {
+     SDL_Rect luffy;
+     SDL_Rect animationLuffy;
  };
- typedef struct sprite_s sprite_t;
+ typedef struct luffy_s luffy_t;
 
 
  /**
  * \brief Structure du world
  */
-struct luffy_s{
+/*struct luffy_s{
     int vie;//vie de luffy
     int map;//map sur laquelle est luffy
 
 };
-typedef struct world_s world_t;
+typedef struct world_s world_t;*/
 
 //map
 typedef unsigned char tileindex; 
