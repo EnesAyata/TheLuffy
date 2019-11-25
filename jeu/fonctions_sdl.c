@@ -16,16 +16,24 @@ SDL_Texture* charger_image_transparente(const char* nomfichier,SDL_Renderer* ren
 }
 
 
-char** modif_tableau(char**tab2,luffy_t* luffy){
-    char** tab=allouer_tab_2D(20,20);
+void modif_tableau(char**tab2,luffy_t* luffy,int n,int m){
+    //char** tab;
+    
     if(luffy->map==1){
-        tab=lire_fichier("map.txt");
+        desallouer_tab_2D(tab2,n);
+        //taille_fichier("map.txt",&n,&m);
+       
+        //tab2=allouer_tab_2D(n,m);
+        tab2=lire_fichier("map.txt");
     }
     if(luffy->map==2){
-        tab=lire_fichier("map.txt");
+        desallouer_tab_2D(tab2,n);
+        //taille_fichier("level.txt",&n,&m);
+        //tab2=allouer_tab_2D(n,m);
+        tab2=lire_fichier("level.txt");
     }
-    free(tab2);
-    return tab;
+    //free(tab2);
+    //return tab;
 
 }
   
@@ -81,7 +89,7 @@ void desallouer_tab_2D(char**tab, int n){
     for(int i=0;i<n;i++){
         free(tab[i]);
     }
-    free(tab);
+    //free(tab);
 }
 
 
@@ -130,8 +138,33 @@ void init_rect(SDL_Rect* SrcR,SDL_Rect* DestL){
 
 }
 
+void affichage_map_tp(char** tab,int n,int m,SDL_Renderer* rend,SDL_Texture* tiles,luffy_t* perso){//avec la tp
+    char** tab2;
+    if(perso->map==1){
+        //desallouer_tab_2D(tab2,n);
+        tab2=lire_fichier("map.txt");
+        taille_fichier("map.txt",&n,&m);
+        afficher_map(tab2,n,m,rend,tiles);
+        desallouer_tab_2D(tab2,n);
+    }
+    if(perso->map==2){
+      //desallouer_tab_2D(tab,n);
+      tab2=lire_fichier("level.txt");
+      taille_fichier("level.txt",&n,&m);
+      afficher_map(tab2,n,m,rend,tiles);
+      desallouer_tab_2D(tab2,n);
+    }
+    //desallouer_tab_2D(tab2,n);
+
+
+
+}
+
+
+
+
 void afficher_map(char** tab,int n,int m,SDL_Renderer* rend,SDL_Texture* tiles){
-  
+
   SDL_Rect SrcR,DestL;
   int cpt;
   init_rect(&SrcR,&DestL);
@@ -215,6 +248,7 @@ void afficher_map(char** tab,int n,int m,SDL_Renderer* rend,SDL_Texture* tiles){
         DestL.y+=TailleTiles;//on saute la ligne ""
         
   }
+  //SDL_DestroyRenderer(rend);
 }
 
 

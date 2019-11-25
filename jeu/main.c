@@ -101,7 +101,7 @@ int main(int argc, char *argv[])
   //textRect.x = 50;
   //textRect.y= 150;
   //SDL_BlitSurface(message,NULL,surface,&textRect);
-  //createmenu(surface, font, rend);
+  createmenu(font, rend);
       
   
 
@@ -117,16 +117,16 @@ int main(int argc, char *argv[])
 
   //test col
 
-
-  createmenu(font,rend);
+  //createmenu(font,rend);
 
   //test création luffy 
   luffy_t* perso;
-  perso=creation_perso();
+  perso=creation_perso(perso);
   afficherL(perso);
 
-  char ** tab2D=modif_tableau(tab2D,perso);//=lire_fichier("map.txt");
+  char ** tab2D=lire_fichier("map.txt");//modif_tableau(tab2D,perso);//=lire_fichier("map.txt");
     afficher_tab_2D(tab2D,n,m);
+
 
 
 
@@ -137,11 +137,13 @@ int main(int argc, char *argv[])
       //SDL_RenderCopy(rend, txtmsg, NULL, &textRect);
       
     while( SDL_PollEvent( &evenements ) )
-    SDL_RenderClear(rend);
+        SDL_RenderClear(rend);
     //modifier_caractere(&tab2D,n,m,'&','e');
-    //detection_porte(tab2D,&DestL,&perso);
-    afficher_map(tab2D,n,m,rend,tiles);
-    //tab2D=modif_tableau(tab2D,perso);
+    detection_porte(tab2D,&DestL,perso,&n,&m);
+    affichage_map_tp(&tab2D,n,m,rend,tiles,perso);
+  
+
+    
     
     //afficherL(perso);
 
@@ -176,6 +178,8 @@ int main(int argc, char *argv[])
   // Quitter SDL
   SDL_DestroyTexture(fond);
   //SDL_DestroyTexture(text);
+  SDL_DestroyTexture(tiles);
+  SDL_DestroyTexture(luffy);
   SDL_DestroyRenderer(rend); 
   SDL_DestroyWindow(fenetre);
   TTF_CloseFont(font);
