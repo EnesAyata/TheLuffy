@@ -41,6 +41,7 @@ char** allouer_tab_2D(int n, int m){
     char** tab;
     //char init=;
     tab=malloc(n*sizeof(char*));
+
     for(int i = 0; i < n; i++){
         tab[i] = malloc(m*sizeof(char*));
     }
@@ -353,26 +354,27 @@ void ecrire_fichier(const char* nomFichier, char** tab, int n,int m){
 }
 
 void deplacement_Luffy(int dep,SDL_Rect* luffy,SDL_Rect* regard, char** map){
-    //printf("La c'est : %d",detect_col(luffy,map,dep));
-   // printf("Le car a droite : %c \n" , map[(luffy->y+6)/31][(luffy->x/31)+1]);
-    // if((luffy->x/30)!=0)
-    //int posX=luffy->x/22,posY=(luffy->y)/22;
-    //    printf("le carac a guche: %c ",map[(luffy->x/30)-1][(luffy->y/30)]);
+
     detect_col(luffy,map,dep);
+    //    printf("le carac a guche: %c ",map[(luffy->x/30)-1][(luffy->y/30)]);
+    //int posX=luffy->x/22,posY=(luffy->y)/22;
+    // if((luffy->x/30)!=0)
+   // printf("Le car a droite : %c \n" , map[(luffy->y+6)/31][(luffy->x/31)+1]);
+    //printf("La c'est : %d",detect_col(luffy,map,dep));
   switch(dep){
-    case 0: if(luffy->x-2>=0 && detect_col(luffy,map,dep)==0  )//&& map[(((luffy->y+30)/31))][(luffy->x/31)]!='+'/*&& detection_col(map,&luffy,dep)==1*/)
+    case 0: if(luffy->x-2>=0  )
                 luffy->x-=2;
             regard->x=TLuffy;
             regard->y=TLuffy;break;
-    case 1: if(luffy->x+2<=500-20 && detect_col(luffy,map,dep)==0)//&& map[(((luffy->y+2)/28))][(luffy->x/28)]!='+'/* && map[(luffy->y/31)][(luffy->x/31)]!='+' */)
+    case 1: if(luffy->x+2<=500-20 )
                 luffy->x+=2;
             regard->x=TLuffy*2;
             regard->y=TLuffy*2;break;
-    case 2: if(luffy->y-2>=0 && detect_col(luffy,map,dep)==0)//&& map[((luffy->y))/32][(luffy->x)/32]!='+' /*&& map[(luffy->y/32)][(luffy->x/32)]!='+'*/)
+    case 2: if(luffy->y-2>=0 )
                 luffy->y-=2;
             regard->x=TLuffy*3;
             regard->y=TLuffy*3;break;
-    case 3: if(luffy->y+2<=500-20 && detect_col(luffy,map,dep)==0)//&& map[((luffy->y))/32][((luffy->x-20)/32)]!='+' /*&& map[(luffy->y/32)][(luffy->x/32)]!='+'*/)
+    case 3: if(luffy->y+2<=500-20 )
                 luffy->y+=2;
             regard->x=0;
             regard->y=0;break;
@@ -387,6 +389,71 @@ void animation_Luffy(SDL_Rect*anim){
   Uint32 seconds = ticks / 100;
   Uint32 sprite = seconds % 5;
   anim->x=sprite*25;
+}
+
+void animation_ennemis(SDL_Rect*anim){
+    
+  Uint32 ticks = SDL_GetTicks();
+  Uint32 seconds = ticks / 100;
+  Uint32 sprite = seconds % 4;
+  anim->x=sprite*25;
+}
+
+
+void deplacement_ennemis(SDL_Rect* ennemis, SDL_Rect* regard){
+    srand(time(NULL));
+    int dep ;//= rand()%4;
+    Uint32 lastTime =0, currentTime;
+
+    currentTime= SDL_GetTicks();
+
+    
+    dep=rand()%4;
+
+    
+    
+    
+
+    switch(dep){
+        case 0: if(ennemis->x + 2 <= 500-TLuffy){
+                
+                ennemis->x+=2;
+                
+                regard->x=TLuffy*2;
+                regard->y=TLuffy*2;
+                
+                
+            
+        }break;
+        case 1: if (ennemis->y+2 <= 475-TLuffy){
+            ennemis->y+=2;
+            regard->x=TLuffy*3;
+            regard->y=TLuffy*3;
+            
+        }break;
+        case 2: if (ennemis->x-2> 0){
+            ennemis->x-=2;
+            regard->x=TLuffy;
+            regard->y=TLuffy;
+            
+        }break;
+        case 3: if (ennemis->y-2>0){
+            ennemis->y-=2;
+            regard->x=0;
+            regard->y=0;
+            
+        }break;
+    }
+
+    
+
+
+
+
+    
+    
+
+        
 }
 
 

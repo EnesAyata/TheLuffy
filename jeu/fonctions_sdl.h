@@ -25,6 +25,8 @@ void modif_tableau(char**tab,luffy_t* luffy,int n,int m);
 
 SDL_Texture* charger_image_transparente(const char* nomfichier,SDL_Renderer* renderer,Uint8 r, Uint8 g, Uint8 b);
 char** allouer_tab_2D_joueur(int n, int m);
+void animation_ennemis(SDL_Rect*anim);
+void deplacement_ennemis(SDL_Rect* ennemis, SDL_Rect* regard_ennemi);
 
 
 #endif

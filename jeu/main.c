@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
   //SDL_FreeSurface(fond);
   //SDL_Texture* obj;
   SDL_Texture* luffy;
+  SDL_Texture* mario;
   SDL_Texture*tiles;
   //SDL_FreeSurface(obj);
   //SDL_FreeSurface(luffy);
@@ -35,7 +36,7 @@ int main(int argc, char *argv[])
 
   // Créer la fenêtre
   fenetre = SDL_CreateWindow("TheLuffy", SDL_WINDOWPOS_CENTERED,
-  SDL_WINDOWPOS_CENTERED, 500, 500, SDL_WINDOW_RESIZABLE);//taille dynamique avec taille fichier + erreur lors de caract nn autorisé
+  SDL_WINDOWPOS_CENTERED, 500, 475, SDL_WINDOW_RESIZABLE);//taille dynamique avec taille fichier + erreur lors de caract nn autorisé
   if(fenetre == NULL) // En cas d’erreur
   {
     printf("Erreur de la creation d’une fenetre: %s",SDL_GetError());
@@ -58,17 +59,31 @@ int main(int argc, char *argv[])
   // Charger l’image avec la transparence
   Uint8 r = 255, g = 255, b = 255;//palette rgb
 
-  //afficher luffy
+  //afficher luffy 
   SDL_Rect DestL;
   DestL.x = 0;
   DestL.y = 0;
   DestL.w =TLuffy;
   DestL.h = TLuffy;
 
-  //jul
+  //afficher Mario
+  SDL_Rect DestM;
+  DestM.x = 100;
+  DestM.y = 100;
+  DestM.w =TLuffy;
+  DestM.h = TLuffy;
+
+
+  //chargement sprite luffy
   luffy = charger_image_transparente("ressources/liffyR.bmp", rend,r,g,b);
 
+  //chargement sprite mario
+  mario = charger_image_transparente("images/chrono.bmp",rend,r,g,b);
+
+
+
   SDL_Rect luffyR= {0,0,TLuffy,TLuffy};
+  SDL_Rect marioR={100,100,TLuffy,TLuffy};
 
   bool terminer = false;
 
@@ -137,18 +152,13 @@ int main(int argc, char *argv[])
       //SDL_RenderCopy(rend, txtmsg, NULL, &textRect);
       
     while( SDL_PollEvent( &evenements ) )
-        SDL_RenderClear(rend);
-    //modifier_caractere(&tab2D,n,m,'&','e');
-    detection_porte(tab2D,&DestL,perso,&n,&m);
-    affichage_map_tp(&tab2D,n,m,rend,tiles,perso);
-  
-
-    
-    
-    //afficherL(perso);
-
-    
+    SDL_RenderClear(rend);
+    afficher_map(tab2D,n,m,rend,tiles);
+    deplacement_ennemis(&DestM,&marioR);
+    animation_ennemis(&marioR);     
     SDL_RenderCopy(rend,luffy,&luffyR,&DestL);
+    SDL_RenderCopy(rend,mario,&marioR,&DestM);
+    //deplacement_ennemies(&luffyR,&DestM);
 
 
     SDL_RenderPresent(rend);
@@ -163,13 +173,15 @@ int main(int argc, char *argv[])
     case SDLK_q:
       terminer = true; break;
   }
+   
 
   switch (evenements.key.keysym.sym)
+
   {
-    case SDLK_LEFT:  deplacement_Luffy(0,&DestL,&luffyR,tab2D);animation_Luffy(&luffyR); break;
-    case SDLK_RIGHT: deplacement_Luffy(1,&DestL,&luffyR,tab2D);animation_Luffy(&luffyR);  break;
-    case SDLK_UP:    deplacement_Luffy(2,&DestL,&luffyR,tab2D);animation_Luffy(&luffyR);  break;
-    case SDLK_DOWN:  deplacement_Luffy(3,&DestL,&luffyR,tab2D);animation_Luffy(&luffyR);  break;
+    case SDLK_LEFT:  deplacement_Luffy(0,&DestL,&luffyR,tab2D);animation_Luffy(&luffyR); /*deplacement_Luffy(0,&DestM,&marioR,tab2D);animation_ennemis(&marioR); deplacement_ennemis(&DestM,&marioR);*/break;
+    case SDLK_RIGHT: deplacement_Luffy(1,&DestL,&luffyR,tab2D);animation_Luffy(&luffyR); /*deplacement_Luffy(1,&DestM,&marioR,tab2D);animation_ennemis(&marioR); deplacement_ennemis(&DestM,&marioR);*/break;
+    case SDLK_UP:    deplacement_Luffy(2,&DestL,&luffyR,tab2D);animation_Luffy(&luffyR);/*deplacement_Luffy(2,&DestM,&marioR,tab2D);animation_ennemis(&marioR);deplacement_ennemis(&DestM,&marioR);*/break;
+    case SDLK_DOWN:  deplacement_Luffy(3,&DestL,&luffyR,tab2D);animation_Luffy(&luffyR); /*deplacement_Luffy(3,&DestM,&marioR,tab2D) ;animation_ennemis(&marioR);deplacement_ennemis(&DestM,&marioR);*/break;
   }
 
   }
@@ -177,6 +189,8 @@ int main(int argc, char *argv[])
   }
   // Quitter SDL
   SDL_DestroyTexture(fond);
+  SDL_DestroyTexture(luffy);
+  SDL_DestroyTexture(mario);
   //SDL_DestroyTexture(text);
   SDL_DestroyTexture(tiles);
   SDL_DestroyTexture(luffy);

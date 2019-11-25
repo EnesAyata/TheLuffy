@@ -5,9 +5,27 @@ void createmenu(TTF_Font* font, SDL_Renderer* rend){
         //Uint32 time;
         int x, y; //event motion
         
+
+        //mise en place du fond
+        SDL_Surface* fond_surface = SDL_LoadBMP("ressources/bleu.bmp");
+        SDL_Texture* fond =  SDL_CreateTextureFromSurface(rend,fond_surface);
+        
+        int fondw, fondh;
+
+        SDL_Rect fond_pos;
+        fond_pos.x=0;
+        fond_pos.y=0;
+        fond_pos.w=500;
+        fond_pos.h=475;
+        /******************************/
+
         bool boolMenu = false;
-        char* label1 = "Play";
-        char* label2 ="Exit";
+        
+        char* label1= malloc(sizeof(char));
+        char* label2= malloc(sizeof(char));
+
+        label1 = "Play";
+        label2 ="Exit";
 
 
 
@@ -54,9 +72,10 @@ void createmenu(TTF_Font* font, SDL_Renderer* rend){
         pos2.y = 260;
         pos2.w = menu2w;
         pos2.h=menu2h;
-
+        SDL_RenderCopy(rend, fond, NULL ,&fond_pos);
         SDL_RenderCopy(rend, menuTex1, NULL ,&pos1);
         SDL_RenderCopy(rend, menuTex2, NULL ,&pos2);
+        
         SDL_RenderPresent(rend);
         SDL_RenderClear(rend);
 
@@ -176,10 +195,12 @@ void createmenu(TTF_Font* font, SDL_Renderer* rend){
                
                 
   
+
         SDL_FreeSurface(menu1);
         SDL_FreeSurface(menu2);
         SDL_DestroyTexture(menuTex1);
         SDL_DestroyTexture(menuTex2);
+        SDL_DestroyTexture(fond);
 
                 //if(1000/30>(SDL_GetTicks()-time)){
                        // SDL_Delay(1000/30-(SDL_GetTicks()-time));
