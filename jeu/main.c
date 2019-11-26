@@ -140,7 +140,10 @@ int main(int argc, char *argv[])
   afficherL(perso);
 
   char ** tab2D=lire_fichier("map.txt");//modif_tableau(tab2D,perso);//=lire_fichier("map.txt");
-    afficher_tab_2D(tab2D,n,m);
+      //tab2D =affichage_map_tp(tab2D,n,m,rend,tiles,perso);
+
+    //afficher_tab_2D(tab2D,n,m);
+
 
 
 
@@ -153,9 +156,13 @@ int main(int argc, char *argv[])
       
     while( SDL_PollEvent( &evenements ) )
     SDL_RenderClear(rend);
+    tab2D=affichage_map_tp(tab2D,n,m,rend,luffy,perso);
     afficher_map(tab2D,n,m,rend,tiles);
     deplacement_ennemis(&DestM,&marioR);
-    animation_ennemis(&marioR);     
+    animation_ennemis(&marioR);   
+    detection_porte(tab2D,&DestL,perso,&n,&m);  
+    //tab2D=affichage_map_tp(tab2D,&n,&m,rend,luffy,perso);
+
     SDL_RenderCopy(rend,luffy,&luffyR,&DestL);
     SDL_RenderCopy(rend,mario,&marioR,&DestM);
     //deplacement_ennemies(&luffyR,&DestM);
@@ -183,6 +190,7 @@ int main(int argc, char *argv[])
     case SDLK_UP:    deplacement_Luffy(2,&DestL,&luffyR,tab2D);animation_Luffy(&luffyR);/*deplacement_Luffy(2,&DestM,&marioR,tab2D);animation_ennemis(&marioR);deplacement_ennemis(&DestM,&marioR);*/break;
     case SDLK_DOWN:  deplacement_Luffy(3,&DestL,&luffyR,tab2D);animation_Luffy(&luffyR); /*deplacement_Luffy(3,&DestM,&marioR,tab2D) ;animation_ennemis(&marioR);deplacement_ennemis(&DestM,&marioR);*/break;
   }
+
 
   }
 

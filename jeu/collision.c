@@ -5,16 +5,17 @@
 int detect_col(SDL_Rect* luffy,char** map, int dep){
     //printf("La pos x de luffy : %d , et y : %d\n",luffy->x,luffy->y);
     //printf("La pos en tab x : %d et en tab y: %d \n ",luffy->x/TLuffy,luffy->y/TLuffy);
-    int posLX= (((luffy->x)+10)/TLuffy) ;//on crée un point au mileu de luffy
-    int posLY= (((luffy->y)+10)/TLuffy) ;
-    if(map[posLY][posLX]=='"'){
-        printf("Luffy est dedans ! on recule ");
+    int posLX= (((luffy->x))/TLuffy) ;//on crée un point au mileu de luffy
+    int posLY= (((luffy->y))/TLuffy) ;
+    /*if(map[posLY][posLX]=='"'){
+        //printf("Luffy est dedans ! on recule ");
 
         /*switch(dep){
             case 0:luffy->x+=2;break;
 
         }*/
-    }
+    //}
+            //printf("pos en x %d et en y %d et le carac a gauche c'est %c\n",posLX,posLY,map[posLY][posLX]);
 
     
     //printf("Pos en x %d et en y %d \n",posLX,posLY);

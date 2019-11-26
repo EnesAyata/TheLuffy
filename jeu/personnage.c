@@ -18,7 +18,6 @@ void detection_porte(char** map,SDL_Rect* luffy,luffy_t* personnage,int* n,int* 
         //taille_fichier("level.txt",&n,&m);
         //tab2=allouer_tab_2D(n,m);
         //map=lire_fichier("level.txt");
-        modif_tableau(map,personnage,&n,&m);
         printf("ALLEZ ON Change ! \n");
         }
 

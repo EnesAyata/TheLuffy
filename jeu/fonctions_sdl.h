@@ -19,7 +19,7 @@ void deplacement_Luffy(int dep,SDL_Rect* luffy,SDL_Rect* regard, char** map);
 void animation_Luffy(SDL_Rect*anim);
 char** lire_fichier(const char* nomFichier);
 void afficher_map(char** tab,int n,int m,SDL_Renderer* rend,SDL_Texture* tiles);
-void affichage_map_tp(char** tab,int n,int m,SDL_Renderer* rend,SDL_Texture* tiles,luffy_t*j);//avec la tp
+char** affichage_map_tp(char** tab,int n,int m,SDL_Renderer* rend,SDL_Texture* tiles,luffy_t*j);//avec la tp
 
 void modif_tableau(char**tab,luffy_t* luffy,int n,int m);
 

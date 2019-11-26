@@ -1,5 +1,5 @@
-SRC=main.c menu.c fonctions_sdl.c collision.c personnage.c
-HEADERS=fonctions_sdl.h world.h menu.h collision.h personnage.h
+SRC=main.c menu.c fonctions_sdl.c collision.c personnage.c map.c
+HEADERS=fonctions_sdl.h world.h menu.h collision.h personnage.h	map.h
 BIN=jeu
 
 LIBS=-

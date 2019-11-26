@@ -61,6 +61,19 @@
  typedef struct luffy_s luffy_t;
 
 
+struct map_s {
+    SDL_Texture*tiles;
+    char**tab2D;
+    int lig;
+    int col;
+    SDL_Renderer* rend;
+    luffy_t* luffy;
+
+};
+typedef struct map_s map_t;
+ /**
+ * \brief Structure du world
+ */
  /**
  * \brief Structure du world
  */
