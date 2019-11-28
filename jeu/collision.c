@@ -10,7 +10,7 @@ int detect_col(SDL_Rect* luffy,char** map, int dep){
     /*if(map[posLY][posLX]=='"'){
         //printf("Luffy est dedans ! on recule ");
 
-        /*switch(dep){
+        switch(dep){
             case 0:luffy->x+=2;break;
 
         }*/

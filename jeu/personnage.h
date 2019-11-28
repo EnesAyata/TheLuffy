@@ -1,4 +1,4 @@
-#include "collision.h"
+#include "fonctions_sdl.h"
 
 #ifndef PERSONNE_H
 #define PERSONNE_H

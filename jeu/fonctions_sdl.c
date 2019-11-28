@@ -21,10 +21,13 @@ void modif_tableau(char**tab2,luffy_t* luffy,int n,int m){
     
     if(luffy->map==1){
         desallouer_tab_2D(tab2,n);
+        
+
         //taille_fichier("map.txt",&n,&m);
        
         //tab2=allouer_tab_2D(n,m);
         tab2=lire_fichier("map.txt");
+
     }
     if(luffy->map==2){
         desallouer_tab_2D(tab2,n);
@@ -313,15 +316,39 @@ void deplacement_ennemis(SDL_Rect* ennemis, SDL_Rect* regard){
         }break;
     }
 
-    
-
-
-
-
-    
-    
-
         
+}
+
+void fireball_att(SDL_Rect* perso, SDL_Rect* fireball_s, SDL_Rect* fireball_dest){
+    fireball_s->x = perso->x;
+    fireball_s->y = perso->y;
+    SDL_Event attack;
+    bool action = false;
+    int x, y;
+    
+    fireball_s->x=perso->x;
+    fireball_s->y = perso->y;
+
+    while(!action){
+        while(SDL_PollEvent(&attack))
+
+        switch(attack.type){
+            case SDL_MOUSEBUTTONUP:
+                SDL_GetMouseState(&x,&y);
+                fireball_dest->x = x-fireball_s->x;
+                fireball_dest->y = y-fireball_s->y;
+                break;
+        }
+    }
+
+
+
+
+
+
+
+            
+
 }
 
 

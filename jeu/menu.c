@@ -46,12 +46,10 @@ void createmenu(TTF_Font* font, SDL_Renderer* rend){
         dest.w=640;
         dest.h=480;
 
-
-        //bool selected=0;
-        
-        //positionnement du texte
-        
-         
+        //load opening music
+        Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+        Mix_Music * son= Mix_LoadMUS("ressources/opening1.mp3");
+        Mix_PlayMusic(son,-1);//-1 = le son joue a l'infini
 
 
         //textures du menu
@@ -62,14 +60,14 @@ void createmenu(TTF_Font* font, SDL_Renderer* rend){
 
         int menu1w, menu1h, menu2w, menu2h;
         SDL_QueryTexture(menuTex1, NULL, NULL, &menu1w, &menu1h);
-        pos1.x = 300;
-        pos1.y = 240;
+        pos1.x = 250;
+        pos1.y = 215;
         pos1.w = menu1w;
         pos1.h=menu1h;
 
         SDL_QueryTexture(menuTex2, NULL, NULL, &menu2w, &menu2h);
-        pos2.x = 300;
-        pos2.y = 260;
+        pos2.x = 250;
+        pos2.y = 250;
         pos2.w = menu2w;
         pos2.h=menu2h;
         SDL_RenderCopy(rend, fond, NULL ,&fond_pos);
@@ -200,6 +198,7 @@ void createmenu(TTF_Font* font, SDL_Renderer* rend){
         SDL_FreeSurface(menu2);
         SDL_DestroyTexture(menuTex1);
         SDL_DestroyTexture(menuTex2);
+        Mix_FreeMusic(son);
         SDL_DestroyTexture(fond);
 
                 //if(1000/30>(SDL_GetTicks()-time)){

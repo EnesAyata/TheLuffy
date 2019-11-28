@@ -1,7 +1,7 @@
 
 
-#include "fonctions_sdl.h"
-#include "personnage.h"
+
+#include "map.h"
 int main(int argc, char *argv[])
 {
 
@@ -20,7 +20,8 @@ int main(int argc, char *argv[])
   //SDL_FreeSurface(fond);
   //SDL_Texture* obj;
   SDL_Texture* luffy;
-  SDL_Texture* mario;
+  SDL_Texture* monstre;
+  SDL_Texture* fireball;
   SDL_Texture*tiles;
   //SDL_FreeSurface(obj);
   //SDL_FreeSurface(luffy);
@@ -66,7 +67,7 @@ int main(int argc, char *argv[])
   DestL.w =TLuffy;
   DestL.h = TLuffy;
 
-  //afficher Mario
+  //afficher Monstre
   SDL_Rect DestM;
   DestM.x = 100;
   DestM.y = 100;
@@ -77,13 +78,13 @@ int main(int argc, char *argv[])
   //chargement sprite luffy
   luffy = charger_image_transparente("ressources/liffyR.bmp", rend,r,g,b);
 
-  //chargement sprite mario
-  mario = charger_image_transparente("images/chrono.bmp",rend,r,g,b);
+  //chargement sprite monstre
+  monstre = charger_image_transparente("images/chrono.bmp",rend,r,g,b);
 
 
 
   SDL_Rect luffyR= {0,0,TLuffy,TLuffy};
-  SDL_Rect marioR={100,100,TLuffy,TLuffy};
+  SDL_Rect monstreR={100,100,TLuffy,TLuffy};
 
   bool terminer = false;
 
@@ -103,36 +104,32 @@ int main(int argc, char *argv[])
 
 
   TTF_Init();
-  //SDL_Surface *message;
-  //SDL_Texture *txtmsg;
-  //SDL_Rect textRect;
-  //SDL_Color textColor ={0,0,0};
   TTF_Font *font;
-
   font =TTF_OpenFont("ressources/oswald.ttf", 30);
-
-  //message = TTF_RenderText_Solid(font, "Enes le plus beau", textColor);
-  //txtmsg= SDL_CreateTextureFromSurface(rend,message);
-  //textRect.x = 50;
-  //textRect.y= 150;
-  //SDL_BlitSurface(message,NULL,surface,&textRect);
   createmenu(font, rend);
+      
       
   
 
+  /* Test création de l'attaque fireball */
+
+  //afficher attaque 
+  SDL_Rect DestF;
+  DestF.x = 0;
+  DestF.y = 0;
+  DestF.w =10;
+  DestF.h = 10;
+
+   //chargement sprite attaque
+  fireball = charger_image_transparente("ressources/fireball.bmp",rend,r,g,b);
+
+
+  SDL_Rect fireballR= {0,0,10,10};
+
   
 
 
 
-
-  //SDL_Rect** tab= allouer_rect(n,m);
-  //tab=remplir_rect(tab2D,n,m);
-
-  //fin affich map
-
-  //test col
-
-  //createmenu(font,rend);
 
   //test création luffy 
   luffy_t* perso;
@@ -158,13 +155,14 @@ int main(int argc, char *argv[])
     SDL_RenderClear(rend);
     tab2D=affichage_map_tp(tab2D,n,m,rend,luffy,perso);
     afficher_map(tab2D,n,m,rend,tiles);
-    deplacement_ennemis(&DestM,&marioR);
-    animation_ennemis(&marioR);   
+    deplacement_ennemis(&DestM,&monstreR);
+    animation_ennemis(&monstreR);   
     detection_porte(tab2D,&DestL,perso,&n,&m);  
     //tab2D=affichage_map_tp(tab2D,&n,&m,rend,luffy,perso);
 
     SDL_RenderCopy(rend,luffy,&luffyR,&DestL);
-    SDL_RenderCopy(rend,mario,&marioR,&DestM);
+    SDL_RenderCopy(rend,monstre,&monstreR,&DestM);
+    SDL_RenderCopy(rend,fireball,&fireballR,&DestF);
     //deplacement_ennemies(&luffyR,&DestM);
 
 
@@ -177,6 +175,7 @@ int main(int argc, char *argv[])
       switch(evenements.key.keysym.sym)
   {
     case SDLK_ESCAPE:
+      createmenu(font, rend); break;
     case SDLK_q:
       terminer = true; break;
   }
@@ -185,10 +184,12 @@ int main(int argc, char *argv[])
   switch (evenements.key.keysym.sym)
 
   {
-    case SDLK_LEFT:  deplacement_Luffy(0,&DestL,&luffyR,tab2D);animation_Luffy(&luffyR); /*deplacement_Luffy(0,&DestM,&marioR,tab2D);animation_ennemis(&marioR); deplacement_ennemis(&DestM,&marioR);*/break;
-    case SDLK_RIGHT: deplacement_Luffy(1,&DestL,&luffyR,tab2D);animation_Luffy(&luffyR); /*deplacement_Luffy(1,&DestM,&marioR,tab2D);animation_ennemis(&marioR); deplacement_ennemis(&DestM,&marioR);*/break;
-    case SDLK_UP:    deplacement_Luffy(2,&DestL,&luffyR,tab2D);animation_Luffy(&luffyR);/*deplacement_Luffy(2,&DestM,&marioR,tab2D);animation_ennemis(&marioR);deplacement_ennemis(&DestM,&marioR);*/break;
-    case SDLK_DOWN:  deplacement_Luffy(3,&DestL,&luffyR,tab2D);animation_Luffy(&luffyR); /*deplacement_Luffy(3,&DestM,&marioR,tab2D) ;animation_ennemis(&marioR);deplacement_ennemis(&DestM,&marioR);*/break;
+    case SDLK_LEFT:  deplacement_Luffy(0,&DestL,&luffyR,tab2D);animation_Luffy(&luffyR); break;
+    case SDLK_RIGHT: deplacement_Luffy(1,&DestL,&luffyR,tab2D);animation_Luffy(&luffyR); break;
+    case SDLK_UP:    deplacement_Luffy(2,&DestL,&luffyR,tab2D);animation_Luffy(&luffyR);break;
+    case SDLK_DOWN:  deplacement_Luffy(3,&DestL,&luffyR,tab2D);animation_Luffy(&luffyR); break;
+    
+    
   }
 
 
@@ -198,7 +199,7 @@ int main(int argc, char *argv[])
   // Quitter SDL
   SDL_DestroyTexture(fond);
   SDL_DestroyTexture(luffy);
-  SDL_DestroyTexture(mario);
+  SDL_DestroyTexture(monstre);
   //SDL_DestroyTexture(text);
   SDL_DestroyTexture(tiles);
   SDL_DestroyTexture(luffy);
