@@ -10,9 +10,9 @@ SDL_Texture* charger_image (const char* nomfichier, SDL_Renderer*renderer) {
 }
 
 SDL_Texture* charger_image_transparente(const char* nomfichier,SDL_Renderer* renderer,Uint8 r, Uint8 g, Uint8 b) {
- SDL_Surface* surface = SDL_LoadBMP(nomfichier) ;
-  //int i=SDL_SetColorKey(surface, SDL_TRUE, SDL_MapRGB(surface->format, r, g, b));
-  return SDL_CreateTextureFromSurface(renderer,surface );
+  SDL_Surface* surface = SDL_LoadBMP(nomfichier) ;
+  SDL_SetColorKey(surface, SDL_TRUE, SDL_MapRGB(surface->format, r, g, b));
+  return SDL_CreateTextureFromSurface(renderer,surface);
 }
 
 

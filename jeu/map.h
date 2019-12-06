@@ -16,7 +16,4 @@ void desallouer_map(map_t* map);
 
 
 
-
-
-
 #endif

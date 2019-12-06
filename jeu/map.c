@@ -1,9 +1,6 @@
 #include "map.h"
 
-void init_map(map_t* map){
-    map=malloc(sizeof(map_t));
 
-}
 
 void desallouer_map(map_t* map){
     free(map);
@@ -44,7 +41,7 @@ char** affichage_map_tp(char** tab,int n,int m,SDL_Renderer* rend,SDL_Texture* t
     }
     if(perso->map==1){
         //desallouer_tab_2D(tab,n);
-        printf("Nv 1\n");
+        //printf("Nv 1\n");
         tab=lire_fichier("map.txt");
         taille_fichier("map.txt",&n,&m);
         afficher_map(tab,n,m,rend,tiles);
@@ -52,12 +49,12 @@ char** affichage_map_tp(char** tab,int n,int m,SDL_Renderer* rend,SDL_Texture* t
         //desallouer_tab_2D(tab2,n);
     }
     if(perso->map==2){
-        printf("Nv 2\n");
+        //printf("Nv 2\n");
       //desallouer_tab_2D(tab,n);
       tab=lire_fichier("level.txt");
       taille_fichier("level.txt",&n,&m);
       
-        afficher_tab_2D(tab,n,m);
+       // afficher_tab_2D(tab,n,m);
       afficher_map(tab,n,m,rend,tiles);
       return tab;
       //desallouer_tab_2D(tab,n);

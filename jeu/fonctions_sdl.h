@@ -7,7 +7,6 @@
 
 
 
-
 SDL_Texture* charger_image (const char* nomfichier, SDL_Renderer*renderer) ;
 void ecrire_fichier(const char* nomFichier, char** tab, int n,int m);
 char** modifier_caractere(char** tab, int n, int m, char ancien, char nouveau);
