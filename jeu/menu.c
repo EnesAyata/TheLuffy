@@ -1,16 +1,24 @@
+/**
+ * \file menu.h
+ * \brief fichier source du menu
+ * \author Enes AYATA / Alpaslan GEBESOGLU
+ * \version 0.1
+ * \date 12 novembre 2019
+ */
+
 #include "menu.h"
 
 
-void createmenu(TTF_Font* font, SDL_Renderer* rend){
+int createmenu(TTF_Font* font, SDL_Renderer* rend){
         //Uint32 time;
         int x, y; //event motion
         
 
         //mise en place du fond
-        SDL_Surface* fond_surface = SDL_LoadBMP("ressources/bleu.bmp");
+        SDL_Surface* fond_surface = SDL_LoadBMP("ressources/fondgame.bmp");
         SDL_Texture* fond =  SDL_CreateTextureFromSurface(rend,fond_surface);
         
-        int fondw, fondh;
+        
 
         SDL_Rect fond_pos;
         fond_pos.x=0;
@@ -39,12 +47,12 @@ void createmenu(TTF_Font* font, SDL_Renderer* rend){
  
         menu1 = TTF_RenderText_Solid(font,label1,color1);//création TTF
         menu2 = TTF_RenderText_Solid(font,label2,color1);
-        SDL_Rect pos1, pos2, dest;
+        SDL_Rect pos1, pos2; //dest;
 
-        dest.x=0;
+        /*dest.x=0;
         dest.y=0;
         dest.w=640;
-        dest.h=480;
+        dest.h=480;*/
 
         //load opening music
         Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
@@ -92,83 +100,12 @@ void createmenu(TTF_Font* font, SDL_Renderer* rend){
                                         //SDL_RenderClear(rend);
 
                                         boolMenu=true;
+                                        Mix_FreeMusic(son);
                                         SDL_Quit();
-              
+                                        return 1;
                                   
                                         break;
-                                /*case SDL_MOUSEMOTION:
-                                        x = event.motion.x;
-                                        y = event.motion.y;
-                                        
-                                        if(x>=pos1.x && x<=pos1.x+pos1.w && y>=pos1.y && y<=pos1.y+pos1.h) 
-                                        {
-                                                if(!selected)
-         
-                                                {
-                                                        selected = 1;
-                                                        //SDL_RenderClear(rend);                                                        
-                                                        menu1 = TTF_RenderText_Solid(font,label1,color2);
-                                                        menuTex1= SDL_CreateTextureFromSurface(rend, menu1);
-                                                        //menuTex2 = SDL_CreateTextureFromSurface(rend, menu2);
-                                                    
-                                                        
-                                                    
-                                                }
-                                                 
-                                        }
-
-                                        else
-                                        {
-                                                if(selected)
-                                                {
-                                                        selected = 0;
-                                                        //SDL_RenderClear(rend);
-                                                        menu1 = TTF_RenderText_Solid(font,label1,color1);
-                                                        menuTex1= SDL_CreateTextureFromSurface(rend, menu1);
-     
-                                                      
-                                                        
-                                                      
-                                                }
-                                                 
-                                        }
-
-                                        if(x>=pos2.x && x<=pos2.x+pos2.w && y>=pos2.y && y<=pos2.y+pos2.h){
-                                                if(!selected)
-                                                {
-                                                        selected = 1;
-                                                        //SDL_RenderClear(rend);
-                                                        menu2 = TTF_RenderText_Solid(font,label2,color2);
-                                                        
-                                                        menuTex2 = SDL_CreateTextureFromSurface(rend, menu2);
-                                               
-                                                        
-                                                   
-                                                }
-                                                
-
-                                        }
-
-                                        else
-                                        {
-                                                if(selected)
-                                                {
-                                                        selected = 0;
-                                                        //SDL_RenderClear(rend);
-                                                        menu2 = TTF_RenderText_Solid(font,label2,color1);
-        
-                                                        menuTex2 = SDL_CreateTextureFromSurface(rend, menu2);
-                                                       
-                                                      
-                                                }
-                                                 
-                                        }
-                                 
-                                        
-                                        
-                                        //SDL_RenderCopy(rend, menuTex1, &pos1, NULL);
-                                        //SDL_RenderCopy(rend, menuTex2, &pos2, NULL);
-                                        break;*/
+                                
 
                                 case SDL_MOUSEBUTTONDOWN:
                                         x = event.button.x;
@@ -177,15 +114,29 @@ void createmenu(TTF_Font* font, SDL_Renderer* rend){
                                         {
                                                 //SDL_RenderClear(rend);
                                                 boolMenu= true;
+                                                Mix_FreeMusic(son);
+                                                return 0;
+                                                
                                             
                                                 
                                         }
 
                                         else if((x>=pos2.x && x<=pos2.x+pos2.w) && (y>=pos2.y && y<=pos2.y+pos2.h)){
                                                 boolMenu=true;
+                                                
+                                                
+                                                Mix_FreeMusic(son);
                                                 SDL_Quit();
+                                                return 1;
+                                                
                                         }
                                 
+                                        break;
+                                        case SDL_KEYDOWN:
+                                                if(event.key.keysym.sym == SDLK_ESCAPE){
+                                                        boolMenu = true;
+                                                        return 1;
+                                                }
                                         break;
                                 
                         }
@@ -198,7 +149,7 @@ void createmenu(TTF_Font* font, SDL_Renderer* rend){
         SDL_FreeSurface(menu2);
         SDL_DestroyTexture(menuTex1);
         SDL_DestroyTexture(menuTex2);
-        Mix_FreeMusic(son);
+        //Mix_FreeMusic(son);
         SDL_DestroyTexture(fond);
 
                 //if(1000/30>(SDL_GetTicks()-time)){
@@ -206,7 +157,7 @@ void createmenu(TTF_Font* font, SDL_Renderer* rend){
                 //}
         
         
-        
+        return 0;
 
          
               

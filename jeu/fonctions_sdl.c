@@ -245,7 +245,7 @@ void deplacement_Luffy(int dep,SDL_Rect* luffy,SDL_Rect* regard, char** map){
                 luffy->y-=2;
             regard->x=TLuffy*3;
             regard->y=TLuffy*3;break;
-    case 3: if(luffy->y+2<=500-20 && detect_col(luffy,map,dep)==0)
+    case 3: if(luffy->y+2<=475-TLuffy && detect_col(luffy,map,dep)==0)
                 luffy->y+=2;
             regard->x=0;
             regard->y=0;break;
@@ -274,14 +274,99 @@ void animation_ennemis(SDL_Rect*anim){
 void deplacement_ennemis(SDL_Rect* ennemis, SDL_Rect* regard){
     srand(time(NULL));
     int dep ;//= rand()%4;
-    Uint32 lastTime =0, currentTime;
+    
 
-    currentTime= SDL_GetTicks();
+    
+    dep=rand()%4;
+
+    switch(dep){
+        case 1: if(ennemis->x + 2 <= 500-TLuffy){
+                
+                ennemis->x+=2;
+                
+                regard->x=TLuffy*2;
+                regard->y=TLuffy*2;
+                
+                
+            
+        }break;
+        case 0: if (ennemis->y+2 <= 475-TLuffy){
+            ennemis->y+=2;
+            regard->x=TLuffy*3;
+            regard->y=TLuffy*3;
+            
+        }break;
+        case 2: if (ennemis->x-2> 0){
+            ennemis->x-=2;
+            regard->x=TLuffy;
+            regard->y=TLuffy;
+            
+        }break;
+        case 3: if (ennemis->y-2>0){
+            ennemis->y-=2;
+            regard->x=0;
+            regard->y=0;
+            
+        }break;
+    }
+
+        
+}
+
+void deplacement_ennemis_deux(SDL_Rect* ennemis, SDL_Rect* regard){
+    srand(time(NULL));
+    int dep ;//= rand()%4;
+    
 
     
     dep=rand()%4;
 
     
+    
+    
+
+    switch(dep){
+        case 0: if(ennemis->x + 2 <= 500-TLuffy){
+                
+                ennemis->x+=2;
+                
+                regard->x=TLuffy*2;
+                regard->y=TLuffy*2;
+                
+                
+            
+        }break;
+        case 3: if (ennemis->y+2 <= 475-TLuffy){
+            ennemis->y+=2;
+            regard->x=TLuffy*3;
+            regard->y=TLuffy*3;
+            
+        }break;
+        case 2: if (ennemis->x-2> 0){
+            ennemis->x-=2;
+            regard->x=TLuffy;
+            regard->y=TLuffy;
+            
+        }break;
+        case 1: if (ennemis->y-2>0){
+            ennemis->y-=2;
+            regard->x=0;
+            regard->y=0;
+            
+        }break;
+    }
+
+        
+}
+
+void deplacement_ennemis_trois(SDL_Rect* ennemis, SDL_Rect* regard){
+    srand(time(NULL));
+    int dep ;//= rand()%4;
+  
+
+    
+    dep=rand()%4;
+
     
     
 
@@ -343,13 +428,22 @@ void fireball_att(SDL_Rect* perso, SDL_Rect* fireball_s, SDL_Rect* fireball_dest
 
 
 
-
-
-
-
-            
-
 }
 
+void collisions_persos(SDL_Rect* perso, SDL_Rect* ennemis){
+    if(perso->x <= ennemis->x-TLuffy && perso->y <= ennemis->y-TLuffy){
+        perso->x-=TLuffy+ennemis->x-perso->x;
+
+    }else if(perso->x <= ennemis->x -TLuffy && perso->y < ennemis->y+TLuffy){
+        //perso->x-=TLuffy+ennemis->x-perso->x;
+
+    }else if(perso->x <= ennemis->x + TLuffy && perso->y <= ennemis->y-TLuffy){
+        //perso->x+=TLuffy-ennemis->x+perso->x;
+
+    }else if(perso->x <= ennemis->x + TLuffy && perso->y < ennemis->y+TLuffy){
+        //perso->x+=TLuffy-ennemis->x+perso->x;
+    }
+
+}
 
 
