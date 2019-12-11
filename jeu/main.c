@@ -1,43 +1,19 @@
 
+#include "liste_ennemis.h"
 
-
-
-
-
-#include "fonctions_sdl.h"
-#include "personnage.h"
-#include "map.h"
-//#include "feu.c"//test avec feu juste sans include rien
-//#include "liste.c"//enlever include la
 
 int main(int argc, char *argv[])
 {
 
-
-
-
   SDL_Window* fenetre; // Déclaration de la fenêtre
   SDL_Event evenements; // Événements liés à la fenêtre
   SDL_Renderer* rend;
-  //SDL_FreeSurface(rend);
-  //SDL_Surface* surface;
-  //SDL_FreeSurface(surface);
-  //SDL_Texture* text;
-  //SDL_FreeSurface(text);
   SDL_Texture* fond;
-  //SDL_FreeSurface(fond);
-  //SDL_Texture* obj;
   SDL_Texture* luffy;
   SDL_Texture* monstre;
   SDL_Texture* monstre_deux;
   SDL_Texture* monstre_trois;
-  SDL_Texture* fireball;
   SDL_Texture*tiles;
-
-  //SDL_FreeSurface(obj);
-  //SDL_FreeSurface(luffy);
-
-
 
   if(SDL_Init(SDL_INIT_VIDEO) < 0) // Initialisation de la SDL
   {
@@ -144,39 +120,18 @@ int main(int argc, char *argv[])
   
   int imenu;// = createmenu(font, rend);
   imenu= createmenu(font, rend);
-  /*if(imenu == 1){
+  if(imenu == 1){
     terminer = true;
-  }*/
+  }
 
 
 
 
 /* ***** ***** ***** */    
-      
-  
-
-  /* Test création de l'attaque fireball */
-
-  //afficher attaque 
-  SDL_Rect DestF;
-  DestF.x = 0;
-  DestF.y = 0;
-  DestF.w =10;
-  DestF.h = 10;
-
-   //chargement sprite attaque
-  fireball = charger_image_transparente("ressources/fireball.bmp",rend,r,g,b);
-
-
-  SDL_Rect fireballR= {0,0,10,10};
-
-  
-
-
 
 
   //test création luffy 
-  luffy_t* perso;
+  luffy_t* perso=NULL;
   perso=creation_perso(perso);
   afficherL(perso);
 
@@ -185,14 +140,14 @@ int main(int argc, char *argv[])
 
     //afficher_tab_2D(tab2D,n,m);
 
-//cree une boule de feu (l'init); //test pour bouyle de feu 
-/*
+
+
 SDL_Texture*feu=charger_image("ressources/feu.bmp",rend);
 //SDL_Texture*feu=charger_image_transparente("ressources/feu.bmp",rend,r,g,b);
 
 //feu_t*feuAtk=init_feu(feu,rend);
-  SDL_Rect bouleFeuDest= {0,0,25,25};
-  SDL_Rect bouleFeuSrc= {0,0,25,25};
+SDL_Rect bouleFeuDest= {0,0,25,25};
+SDL_Rect bouleFeuSrc= {0,0,25,25};
 Liste_t*listBf=initialisation();
 perso_t*boule1=creeEntite(bouleFeuSrc,bouleFeuDest,feu,10);
 bouleFeuDest.x+=25;
@@ -204,16 +159,31 @@ insertion(listBf,boule2);
 
 perso_t*actuel;
 
-afficherListe(listBf);*/
+afficherListe(listBf);
 
+/* **************************** */
+//test affichage monstres via listes chaînées
 
-  //fin co
+Liste_ennemis_t* liste_ennemis= initialisation_ennemi();
+ennemi_t* ennemi1 = creeEntite_en1(monstreR,DestM,monstre,10);
+ennemi_t* ennemi2 = creeEntite_en1(monstreR_deux,DestM_deux,monstre_deux,10);
+ennemi_t* ennemi3 = creeEntite_en1(monstreR_trois,DestM_trois,monstre_trois,10);
+insertion_ennemis(liste_ennemis, ennemi1);
+insertion_ennemis(liste_ennemis, ennemi2);
+insertion_ennemis(liste_ennemis, ennemi3);
+ennemi_t* monstre_actu;
+
+afficherListe_en(liste_ennemis);
+
+/* **************************** */
+
+  
   // Boucle principale
   while(!terminer)
   {
-      //SDL_RenderCopy(rend, txtmsg, NULL, &textRect);
+
       
-    while( SDL_PollEvent( &evenements ) )
+  while( SDL_PollEvent( &evenements ) )
     SDL_RenderClear(rend);
     tab2D=affichage_map_tp(tab2D,n,m,rend,luffy,perso);
     afficher_map(tab2D,n,m,rend,tiles);
@@ -223,94 +193,56 @@ afficherListe(listBf);*/
     animation_ennemis(&monstreR);  
     animation_ennemis(&monstreR_deux); 
     animation_ennemis(&monstreR_trois);  
-    //collisions_persos(&luffyR, &monstreR);
-    //collisions_persos(&luffyR, &monstreR_deux);
-    //collisions_persos(&luffyR, &monstreR_trois);
     detection_porte(tab2D,&DestL,perso,&n,&m);  
-    //tab2D=affichage_map_tp(tab2D,&n,&m,rend,luffy,perso);
-
-    //SDL_RenderCopy(feuAtk->rend,feuAtk->tiles,&(feuAtk->Src),&(feuAtk->Dest));
-    //animation_feu(feuAtk);
-    //feuAtk->Dest.x+=1;
-    //testFeu(0,0,rend);
     SDL_RenderCopy(rend,luffy,&luffyR,&DestL);
     SDL_RenderCopy(rend,monstre,&monstreR,&DestM);
     SDL_RenderCopy(rend,monstre_deux,&monstreR_deux,&DestM_deux);
     SDL_RenderCopy(rend,monstre_trois,&monstreR_trois,&DestM_trois);
-    SDL_RenderCopy(rend,fireball,&fireballR,&DestF);
-    
-
-
-
-    
-      //perso_t* bf=creeEntite(feuAtk->Src,feuAtk->Dest,feuAtk->tiles);
-      //SDL_RenderCopy(rend,listBf->premier->sprite,&listBf->premier->src,&listBf->premier->dest);
-     //TEST AFFICHER BOULE DE FEU DANS LE JEU 
-     /*
-      if(listBf->lenght!=0)
-        actuel=listBf->premier;
-      if(check_colli(actuel->dest,DestL)|| listBf->lenght==0){
-            supprimer(listBf,actuel);
-            //desallouer_feu(feuAtk);
-        }
-        else{
-        
-        animation_feu(actuel);
-        SDL_RenderCopy(rend,feu,&actuel->src,&actuel->dest);
-        actuel->dest.x+=1;
-        actuel=actuel->suivant;
-        }
-        */
-      //launch_ball(&(actuel->dest),1,&DestL,&DestL,rend);
-      /*
-      while(actuel->suivant!=NULL){
-        actuel->suivant=actuel;
-        if(check_colli(actuel->dest,DestL)){
-            supprimer(listBf,actuel);
-            //desallouer_feu(feuAtk);
-        }
-              //printf("je rentre ici aiiso \n");
-        else{SDL_RenderCopy(rend,actuel->sprite,&actuel->src,&actuel->dest);
-        
-        actuel->dest.x+=1;}
-          //printf("Il ya colli! \n");
-          //supprimer(listBf,actuel);
-      
-        //launch_ball(&(actuel->dest),1,&DestL,&DestL,rend);
-        //actuel=actuel->suivant;
-      }
-      */
-  
-     /*
-     printf("length %d\n",listBf->lenght);
-     //printf("vie du prems : %d\n et vie du suivant %d\n",listBf->premier->vie,listBf->premier->suivant->vie);
-       for(int i=1;i<=listBf->lenght;i++){
-         printf("je rentre ici\n");
-         if(i==0){
-           actuel=listBf->premier;
-         }
-         else{actuel=actuel->suivant;}
-         SDL_RenderCopy(rend,actuel->sprite,&actuel->src,&actuel->dest);
-         animation_feu(actuel);
-         actuel->dest.x+=1;
-         if(!(check_colli(actuel->dest,DestL))){
-            supprimer(listBf,actuel);
-            //perso_t* bf=creeEntite(feuAtk->Src,feuAtk->Dest,feuAtk->tiles,40);
-            //desallouer_feu(feuAtk);
-        }
-        actuel=listBf->premier;
-        SDL_RenderCopy(rend,actuel->sprite,&actuel->src,&actuel->dest);
-        if(check_colli(actuel->dest,DestL)){
-            printf("Il y a colli\n");supprimer(listBf,actuel);
-            //perso_t* bf=creeEntite(feuAtk->Src,feuAtk->Dest,feuAtk->tiles,40);
-            //desallouer_feu(feuAtk);
-        }
-
-       }*/
-        if(imenu == 1){
-          terminer = true;
-        }
     SDL_RenderPresent(rend);
+     
+    if(listBf->lenght!=0){
+      actuel=listBf->premier;
+    }
+      
+
+    if(check_colli(actuel->dest,DestL)|| listBf->lenght==0){
+          supprimer(listBf,actuel);
+      }
+    else{
+    
+      animation_feu(actuel);
+      SDL_RenderCopy(rend,feu,&actuel->src,&actuel->dest);
+      actuel->dest.x+=1;
+      actuel=actuel->suivant;
+    }
+        
+
+    /* même méthode pour le monstre */
+    if(liste_ennemis->lenght!=0){
+      monstre_actu=liste_ennemis->premier;
+    }
+    if(check_colli(monstre_actu->dest,DestL) || liste_ennemis->lenght==0){
+      supprimer_ennemi(liste_ennemis,monstre_actu);
+
+    }else{
+      SDL_RenderCopy(rend,feu,&monstre_actu->src,&monstre_actu->dest);
+      deplacement_ennemis(&monstre_actu->dest,&monstre_actu->src);
+      animation_ennemis(&monstre_actu->src);  
+      monstre_actu=monstre_actu->suivant;
+    }
+
+
+    /* **************************** */
+      if(check_colli(DestM_deux,DestL)){
+        SDL_DestroyTexture(monstre_deux);
+      }
+      if(check_colli(DestM,DestL)){
+        SDL_DestroyTexture(monstre);
+      }
+      if(check_colli(DestM_trois,DestL)){
+        SDL_DestroyTexture(monstre_trois);
+      }
+    /* **************************** */
     switch(evenements.type)
   {
     case SDL_QUIT:
@@ -319,7 +251,15 @@ afficherListe(listBf);*/
       switch(evenements.key.keysym.sym)
   {
     case SDLK_ESCAPE:
+    printf("%d",imenu);
+    if(imenu==2){
       imenu=createmenu(font,rend);
+    }
+      /*imenu=createmenu(font,rend);
+      
+      if(imenu == 2){
+        terminer = true;
+      }*/
       
       break;
 
@@ -340,7 +280,7 @@ afficherListe(listBf);*/
 
 
   }
- 
+  
   }
   // Quitter SDL
   SDL_DestroyTexture(fond);
@@ -350,7 +290,6 @@ afficherListe(listBf);*/
   SDL_DestroyTexture(monstre_trois);
   //SDL_DestroyTexture(text);
   SDL_DestroyTexture(tiles);
-  //SDL_DestroyTexture(luffy);
   SDL_DestroyRenderer(rend); 
   SDL_DestroyWindow(fenetre);
   TTF_CloseFont(font);

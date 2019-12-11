@@ -38,7 +38,7 @@ luffy_t* creation_perso(luffy_t* j){
 }
 
 void desallouer_perso(luffy_t* perso){
-    free(&perso);//a refaire car jsuis pas sur ?
+    free(perso);//a refaire car jsuis pas sur ?
 }
 
 void afficherL(luffy_t *perso){

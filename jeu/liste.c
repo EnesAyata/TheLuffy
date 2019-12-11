@@ -1,33 +1,7 @@
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <string.h>
-
-#include <SDL2/SDL.h>
-#include<math.h>
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_mixer.h>
-#include <SDL2/SDL_image.h>
-typedef struct perso_s perso_t;
- struct perso_s{
-    SDL_Rect src;
-    SDL_Rect dest;
-    SDL_Texture* sprite;    
-    //feu_t*feu;
-    
-    int vie;
-    perso_t *precedent;
-    perso_t *suivant;
-};
-typedef struct perso_s perso_t;
+#include "liste.h"
 
 
-struct Liste_s{
-    int lenght;
-    perso_t *premier;
-};
-typedef struct Liste_s Liste_t;
 
 Liste_t *initialisation()
 {
@@ -66,6 +40,7 @@ void insertion(Liste_t *liste,perso_t*aAjout){//ajouter en param tout ce qu'il y
         liste->lenght++;
     }
     else{
+        
         liste->premier=aAjout;
         liste->lenght++;
     }
@@ -103,6 +78,7 @@ void supprimer(Liste_t*liste,perso_t* asupp){//ajouter un ID dans la struct et l
             
         }
         free(asupp);
+        
         /*//FREE A REAFIRE !!!!!!!!!!!!!!!!!!!!
         //free(asupp->dest);
         //free(asupp->feu);

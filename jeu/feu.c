@@ -1,17 +1,8 @@
-#define TFeu 25
-#include "world.h"
+
+#include "feu.h"
 
 
-struct feu_s {
-    SDL_Texture*tiles;
 
-    SDL_Renderer* rend;
-    SDL_Rect Dest;
-    SDL_Rect Src;
-
-    
-
-};typedef struct feu_s feu_t;
 
 
 feu_t* init_feu(SDL_Texture*tiles,SDL_Renderer* rend){
@@ -94,7 +85,7 @@ void launch_ball(SDL_Rect* srcI,int cas,SDL_Rect*DestEnnemi,SDL_Rect*Lanceur,SDL
     case 1://droite
 
         //SDL_RenderCopy(feu->rend,feu->tiles,&(feu->Src),&(feu->Dest));
-        /*
+        
        while(feu->Dest->x<500 || feu->Dest->y<500){
             printf("J'entre ici ! \n");
             

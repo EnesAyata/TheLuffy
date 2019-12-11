@@ -59,7 +59,7 @@ char** affichage_map_tp(char** tab,int n,int m,SDL_Renderer* rend,SDL_Texture* t
       return tab;
       //desallouer_tab_2D(tab,n);
     }
-    return;
+    return NULL;
 
     //desallouer_tab_2D(tab2,n);
     

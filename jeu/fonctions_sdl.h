@@ -172,7 +172,9 @@ void deplacement_ennemis_trois(SDL_Rect* ennemis, SDL_Rect* regard);
  * \param perso SDL_Rect* Luffy
  * \param ennemis SDL_Rect* ennemi quelconque
 */
-void collisions_persos(SDL_Rect* perso, SDL_Rect* ennemis);
+void collisions_persos(SDL_Rect* perso,SDL_Rect* perso_dest, SDL_Texture* perso_texture, SDL_Renderer* rend, SDL_Rect* ennemis);
+
+
 void fireball_att(SDL_Rect* perso, SDL_Rect* fireball_s, SDL_Rect* fireball_dest);
 
 #endif

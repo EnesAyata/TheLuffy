@@ -115,7 +115,7 @@ int createmenu(TTF_Font* font, SDL_Renderer* rend){
                                                 //SDL_RenderClear(rend);
                                                 boolMenu= true;
                                                 Mix_FreeMusic(son);
-                                                return 0;
+                                                return 2;
                                                 
                                             
                                                 
@@ -157,7 +157,7 @@ int createmenu(TTF_Font* font, SDL_Renderer* rend){
                 //}
         
         
-        return 0;
+        return 2;
 
          
               

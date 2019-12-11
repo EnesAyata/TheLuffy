@@ -92,16 +92,6 @@ void desallouer_rect(SDL_Rect** tab,int n){
 
 
 
-/*
-void verif_tab(char** tab){
-    for(int i=0;i<20;i++){
-        for(int j=0;j<20;j++){
-            if(tab[i][j]=='\n')
-                tab[i][j]=0;
-        }
-    }
-}
-*/
 
 void init_rect(SDL_Rect* SrcR,SDL_Rect* DestL){
   SrcR->x=0;
@@ -133,12 +123,7 @@ void taille_fichier(const char* nomFichier, int * nbLig, int* nbCol){
     fichier=fopen(nomFichier,"r");
     char c= fgetc(fichier);
 
-    //int caractActuel=0;
 
-    //int tmaxC=0,tmaxL=0,tmpC=0;
-
-
-    
      if(fichier!=NULL){
         while(c!=EOF){
        if(c=='\n'){
@@ -226,12 +211,6 @@ void ecrire_fichier(const char* nomFichier, char** tab, int n,int m){
 
 void deplacement_Luffy(int dep,SDL_Rect* luffy,SDL_Rect* regard, char** map){
 
-    
-    //    printf("le carac a guche: %c ",map[(luffy->x/30)-1][(luffy->y/30)]);
-    //int posX=luffy->x/22,posY=(luffy->y)/22;
-    // if((luffy->x/30)!=0)
-   // printf("Le car a droite : %c \n" , map[(luffy->y+6)/31][(luffy->x/31)+1]);
-    //printf("La c'est : %d",detect_col(luffy,map,dep));
   switch(dep){
     case 0: if(luffy->x-2>=0 && detect_col(luffy,map,dep)==0 )
                 luffy->x-=2;
@@ -250,7 +229,7 @@ void deplacement_Luffy(int dep,SDL_Rect* luffy,SDL_Rect* regard, char** map){
             regard->x=0;
             regard->y=0;break;
   }
-  return ;
+  
 }
 
 
@@ -273,11 +252,9 @@ void animation_ennemis(SDL_Rect*anim){
 
 void deplacement_ennemis(SDL_Rect* ennemis, SDL_Rect* regard){
     srand(time(NULL));
-    int dep ;//= rand()%4;
+    int dep ;
     
-
-    
-    dep=rand()%4;
+    dep=rand()%4;//choix de déplacement généré aléatoirement
 
     switch(dep){
         case 1: if(ennemis->x + 2 <= 500-TLuffy){
@@ -315,15 +292,9 @@ void deplacement_ennemis(SDL_Rect* ennemis, SDL_Rect* regard){
 
 void deplacement_ennemis_deux(SDL_Rect* ennemis, SDL_Rect* regard){
     srand(time(NULL));
-    int dep ;//= rand()%4;
-    
-
-    
-    dep=rand()%4;
-
-    
-    
-    
+    int dep ; 
+        
+    dep=rand()%4; //choix de déplacement généré aléatoirement
 
     switch(dep){
         case 0: if(ennemis->x + 2 <= 500-TLuffy){
@@ -361,14 +332,9 @@ void deplacement_ennemis_deux(SDL_Rect* ennemis, SDL_Rect* regard){
 
 void deplacement_ennemis_trois(SDL_Rect* ennemis, SDL_Rect* regard){
     srand(time(NULL));
-    int dep ;//= rand()%4;
-  
-
+    int dep ;
     
     dep=rand()%4;
-
-    
-    
 
     switch(dep){
         case 0: if(ennemis->x + 2 <= 500-TLuffy){
@@ -430,18 +396,30 @@ void fireball_att(SDL_Rect* perso, SDL_Rect* fireball_s, SDL_Rect* fireball_dest
 
 }
 
-void collisions_persos(SDL_Rect* perso, SDL_Rect* ennemis){
+void collisions_persos(SDL_Rect* perso,SDL_Rect* perso_dest, SDL_Texture* perso_texture, SDL_Renderer* rend, SDL_Rect* ennemis){
     if(perso->x <= ennemis->x-TLuffy && perso->y <= ennemis->y-TLuffy){
-        perso->x-=TLuffy+ennemis->x-perso->x;
+        perso->x-=fabs(TLuffy+ennemis->x);
+        //SDL_RenderClear(rend);
+        //SDL_RenderCopy(rend ,perso_texture,perso,perso_dest);
+        //SDL_RenderPresent(rend);
 
     }else if(perso->x <= ennemis->x -TLuffy && perso->y < ennemis->y+TLuffy){
-        //perso->x-=TLuffy+ennemis->x-perso->x;
+        perso->x-=fabs(TLuffy+ennemis->x);
+        //SDL_RenderClear(rend);
+        //SDL_RenderCopy(rend ,perso_texture,perso,perso_dest);
+        //SDL_RenderPresent(rend);
 
     }else if(perso->x <= ennemis->x + TLuffy && perso->y <= ennemis->y-TLuffy){
-        //perso->x+=TLuffy-ennemis->x+perso->x;
+        perso->x+=fabs(TLuffy-ennemis->x);
+        //SDL_RenderClear(rend);
+        //SDL_RenderCopy(rend ,perso_texture,perso,perso_dest);
+        //SDL_RenderPresent(rend);
 
     }else if(perso->x <= ennemis->x + TLuffy && perso->y < ennemis->y+TLuffy){
-        //perso->x+=TLuffy-ennemis->x+perso->x;
+        perso->x+=fabs(TLuffy-ennemis->x);
+        //SDL_RenderClear(rend);
+        //SDL_RenderCopy(rend ,perso_texture,perso,perso_dest);
+        //SDL_RenderPresent(rend);
     }
 
 }
