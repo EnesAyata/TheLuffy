@@ -40,6 +40,8 @@ void afficherListe_map(Liste_ennemis_t*liste,SDL_Renderer*rend);
 void print_monstre_list(Liste_ennemis_t*list,SDL_Renderer*rend);
 void freeListEn(Liste_ennemis_t*listBf);
 void animation_ennemi_map(SDL_Rect*dest,SDL_Rect*src,SDL_Renderer* rend,SDL_Texture* text);
-
+void animation_ennemi_map_deux(SDL_Rect*dest,SDL_Rect*src,SDL_Renderer* rend,SDL_Texture* text);
+void animation_ennemi_map_trois(SDL_Rect*dest,SDL_Rect*src,SDL_Renderer* rend,SDL_Texture* text);
+void animation_ennemi_map_quatre(SDL_Rect*dest,SDL_Rect*src,SDL_Renderer* rend,SDL_Texture* text);
 
 #endif

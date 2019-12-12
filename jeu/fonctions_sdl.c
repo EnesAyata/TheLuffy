@@ -370,6 +370,46 @@ void deplacement_ennemis_trois(SDL_Rect* ennemis, SDL_Rect* regard){
         
 }
 
+void deplacement_ennemis_quatre(SDL_Rect* ennemis, SDL_Rect* regard){
+    srand(time(NULL));
+    int dep ;
+    
+    dep=rand()%4;
+
+    switch(dep){
+        case 2: if(ennemis->x + 2 <= 500-TLuffy){
+                
+                ennemis->x+=2;
+                
+                regard->x=TLuffy*2;
+                regard->y=TLuffy*2;
+                
+                
+            
+        }break;
+        case 3: if (ennemis->y+2 <= 475-TLuffy){
+            ennemis->y+=2;
+            regard->x=TLuffy*3;
+            regard->y=TLuffy*3;
+            
+        }break;
+        case 1: if (ennemis->x-2> 0){
+            ennemis->x-=2;
+            regard->x=TLuffy;
+            regard->y=TLuffy;
+            
+        }break;
+        case 0: if (ennemis->y-2>0){
+            ennemis->y-=2;
+            regard->x=0;
+            regard->y=0;
+            
+        }break;
+    }
+
+        
+}
+
 void fireball_att(SDL_Rect* perso, SDL_Rect* fireball_s, SDL_Rect* fireball_dest){
     fireball_s->x = perso->x;
     fireball_s->y = perso->y;

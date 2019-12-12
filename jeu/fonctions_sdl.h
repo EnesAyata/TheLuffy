@@ -167,6 +167,7 @@ void deplacement_ennemis_deux(SDL_Rect* ennemis, SDL_Rect* regard);
 */
 void deplacement_ennemis_trois(SDL_Rect* ennemis, SDL_Rect* regard);
 
+void deplacement_ennemis_quatre(SDL_Rect* ennemis, SDL_Rect* regard);
 /**
  * \brief : collision entre deux persos
  * \param perso SDL_Rect* Luffy

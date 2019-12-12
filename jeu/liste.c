@@ -270,17 +270,17 @@ void gestion_mst(mst_t*mst1,mst_t*mst2,mst_t*mst3,mst_t*mst4,SDL_Renderer*rend,S
 
     if(mst2->est_affiche==0){
         SDL_RenderCopy(rend,monstre,&mst2->src,&mst2->dest);
-        animation_ennemi_map(&mst2->dest,&mst2->src,rend,monstre);
+        animation_ennemi_map_deux(&mst2->dest,&mst2->src,rend,monstre);
     }
 
     if(mst3->est_affiche==0){
         SDL_RenderCopy(rend,monstre,&mst3->src,&mst3->dest);
-        animation_ennemi_map(&mst3->dest,&mst3->src,rend,monstre);
+        animation_ennemi_map_trois(&mst3->dest,&mst3->src,rend,monstre);
     }
 
     if(mst4->est_affiche==0){
         SDL_RenderCopy(rend,monstre,&mst4->src,&mst4->dest);
-        animation_ennemi_map(&mst4->dest,&mst4->src,rend,monstre);
+        animation_ennemi_map_quatre(&mst4->dest,&mst4->src,rend,monstre);
     }
 
     perso_t*actuel=listBf->premier;

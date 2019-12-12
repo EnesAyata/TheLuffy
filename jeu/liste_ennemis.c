@@ -188,25 +188,34 @@ int rand_a_b(int a,int b){
     return rand()%(b-a)+a;
 }
 
-    void animation_ennemi_map(SDL_Rect*dest,SDL_Rect*src,SDL_Renderer* rend,SDL_Texture* text){
-       /* int rand=rand_a_b(0,7500);
-        if(rand<rand1){
-            rand=rand1;
-        }
-
-        printf("le rand %d\n",rand);
-        if(rand<2500){
-        deplacement_ennemis(dest,src);
-        }
-        else if(rand>2500 && rand<5000){
-            deplacement_ennemis_deux(dest,src);
-        }
-        else if(rand>5000 && rand<7500){
-        deplacement_ennemis_trois(dest,src);
-        }*/
+void animation_ennemi_map(SDL_Rect*dest,SDL_Rect*src,SDL_Renderer* rend,SDL_Texture* text){
+    
         deplacement_ennemis(dest,src);
         animation_ennemis(&src);
-        //SDL_RenderCopy(rend,text,&src,&dest);
-    }    
+    
+}   
+
+void animation_ennemi_map_deux(SDL_Rect*dest,SDL_Rect*src,SDL_Renderer* rend,SDL_Texture* text){
+    
+        deplacement_ennemis_deux(dest,src);
+        animation_ennemis(&src);
+    
+} 
+
+void animation_ennemi_map_trois(SDL_Rect*dest,SDL_Rect*src,SDL_Renderer* rend,SDL_Texture* text){
+    
+        deplacement_ennemis_trois(dest,src);
+        animation_ennemis(&src);
+    
+} 
+
+void animation_ennemi_map_quatre(SDL_Rect*dest,SDL_Rect*src,SDL_Renderer* rend,SDL_Texture* text){
+    
+        deplacement_ennemis_quatre(dest,src);
+        animation_ennemis(&src);
+    
+} 
+
+
 
 
