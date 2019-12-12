@@ -13,7 +13,6 @@
 #include <SDL2/SDL_image.h>
 #include <time.h>
 
-
 /**
  * \file world.h
  * \brief fichier header du monde pricipal
@@ -58,6 +57,7 @@
      int atk;//l'atk de luffy
      int experience;//l'xp de luffy
      int argent;//l'argent de luffy
+     int deplacement;//deplacement de la boule de feu
  };
  typedef struct luffy_s luffy_t;
 
@@ -68,7 +68,9 @@ struct map_s {
     int lig;
     int col;
     SDL_Renderer* rend;
+    const char* nomMap;//nom de la map
     luffy_t* luffy;
+    //Liste_t*listBf;
 
 };
 typedef struct map_s map_t;

@@ -209,7 +209,7 @@ void ecrire_fichier(const char* nomFichier, char** tab, int n,int m){
     fclose(fichier);
 }
 
-void deplacement_Luffy(int dep,SDL_Rect* luffy,SDL_Rect* regard, char** map){
+void deplacement_Luffy(int dep,SDL_Rect* luffy,SDL_Rect* regard,char** map){
 
   switch(dep){
     case 0: if(luffy->x-2>=0 && detect_col(luffy,map,dep)==0 )

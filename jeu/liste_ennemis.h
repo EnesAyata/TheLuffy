@@ -10,7 +10,7 @@ typedef struct ennemi_s ennemi_t;
     SDL_Rect dest;
     SDL_Texture* sprite;    
     //feu_t*feu;
-    
+    int estAffiche;//0 pour oui 1 pr non
     int vie;
     ennemi_t *precedent;
     ennemi_t *suivant;
@@ -33,5 +33,13 @@ ennemi_t* creeEntite_en2(SDL_Rect src,SDL_Rect dest,SDL_Texture*text,int vie);
 ennemi_t* creeEntite_en3(SDL_Rect src,SDL_Rect dest,SDL_Texture*text,int vie);
 void supprimer_ennemi(Liste_ennemis_t*liste, ennemi_t* asupp);
 void afficherListe_en(Liste_ennemis_t *liste);
+
+int rand_a_b(int a,int b);
+void afficherListe_map(Liste_ennemis_t*liste,SDL_Renderer*rend);
+
+void print_monstre_list(Liste_ennemis_t*list,SDL_Renderer*rend);
+void freeListEn(Liste_ennemis_t*listBf);
+void animation_ennemi_map(SDL_Rect*dest,SDL_Rect*src,SDL_Renderer* rend,SDL_Texture* text);
+
 
 #endif

@@ -1,6 +1,18 @@
 #include "map.h"
 
+map_t* cree_map(char** tab2D,SDL_Renderer* rend,luffy_t*luffy,SDL_Texture*tiles,const char* nomMap){//,Liste_t*listBf){//,Liste_t*listBf){//ajoute liste chaine de mst ou bouel de feu 
+map_t*map= malloc(sizeof(map_t));
+int n,m;
+taille_fichier(nomMap,&n,&m);
 
+map->col=n;
+map->lig=m;
+map->luffy=luffy;
+map->tab2D=tab2D;
+map->tiles=tiles;
+map->nomMap=nomMap;
+return map;
+}
 
 void desallouer_map(map_t* map){
     free(map);
@@ -154,4 +166,15 @@ void afficher_map(char** tab,int n,int m,SDL_Renderer* rend,SDL_Texture* tiles){
         
   }
   //SDL_DestroyRenderer(rend);
+}
+
+
+void afficher_map_struct(map_t*map,SDL_Renderer*rend,SDL_Texture*tilesLuffy){
+    //tab2D=affichage_map_tp(tab2D,n,m,rend,tilesLuffy,map->luffy);
+    //afficher_map(tab2D,n,m,rend,tiles);
+    char**tab2DT=lire_fichier(map->nomMap);
+    afficher_map(tab2DT,map->lig,map->col,rend,map->tiles);
+    map->tab2D=affichage_map_tp(tab2DT,map->lig,map->col,rend,tilesLuffy,map->luffy);
+
+    //afficher_map(tab2DT,map->lig,map->col,rend,map->tiles);
 }

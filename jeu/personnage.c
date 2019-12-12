@@ -11,9 +11,12 @@ void detection_porte(char** map,SDL_Rect* luffy,luffy_t* personnage,int* n,int* 
         if(personnage->map==1)
             personnage->map=2;//on change la map
         else if(personnage->map==2)
-            personnage->map=1;//on change la map
+            personnage->map=3;//on change la map
+        else if(personnage->map==3)
+            personnage->map=4;//on change la map
         luffy->x=0;
         luffy->y=0;
+        printf("La map %d",personnage->map);
         //desallouer_tab_2D(map,n);
         //taille_fichier("level.txt",&n,&m);
         //tab2=allouer_tab_2D(n,m);
@@ -33,6 +36,7 @@ luffy_t* creation_perso(luffy_t* j){
     j->map=1;
     j->experience=0;
     j->atk=10;
+    j->deplacement=0;
     return j;
   
 }
