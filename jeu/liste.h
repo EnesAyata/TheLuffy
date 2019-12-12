@@ -44,4 +44,7 @@ void atk_luffy(Liste_t*listBf,SDL_Renderer*rend,luffy_t*luffy);
 mst_t *creemst(SDL_Rect dest,SDL_Rect src);
 void gestion_mst(mst_t*mst1,mst_t*mst2,mst_t*mst3,mst_t*mst4,SDL_Renderer*rend,SDL_Texture* monstre,Liste_t*listBf);
 
+void colli_perso(SDL_Rect a, SDL_Rect b);
+
+
 #endif
