@@ -167,7 +167,7 @@ void NewBouleFeu(Liste_t* list,SDL_Rect*luffy,SDL_Renderer* rend,luffy_t*luffyPe
         }
     }
     //else{freeList(list);}
-    /*
+    
     SDL_Rect bouleFeuDest= {luffy->x,luffy->y,25,25};
                 SDL_Rect bouleFeuSrc= {0,0,25,25};
                 SDL_Texture*feu=charger_image("ressources/feu.bmp",rend);
@@ -262,6 +262,34 @@ mst_t*creemst(SDL_Rect dest,SDL_Rect src){
     return new;
 }
 
+
+void animation_ennemi_map(SDL_Rect*dest,SDL_Rect*src,SDL_Renderer* rend,SDL_Texture* text){
+    
+        deplacement_ennemis(dest,src);
+        animation_ennemis(src);
+    
+}   
+
+void animation_ennemi_map_deux(SDL_Rect*dest,SDL_Rect*src,SDL_Renderer* rend,SDL_Texture* text){
+    
+        deplacement_ennemis_deux(dest,src);
+        animation_ennemis(src);
+    
+} 
+
+void animation_ennemi_map_trois(SDL_Rect*dest,SDL_Rect*src,SDL_Renderer* rend,SDL_Texture* text){
+    
+        deplacement_ennemis_trois(dest,src);
+        animation_ennemis(src);
+    
+} 
+
+void animation_ennemi_map_quatre(SDL_Rect*dest,SDL_Rect*src,SDL_Renderer* rend,SDL_Texture* text){
+    
+        deplacement_ennemis_quatre(dest,src);
+        animation_ennemis(src);
+    
+} 
 void gestion_mst(mst_t*mst1,mst_t*mst2,mst_t*mst3,mst_t*mst4,SDL_Renderer*rend,SDL_Texture* monstre,Liste_t* listBf){
     if(mst1->est_affiche==0){
         SDL_RenderCopy(rend,monstre,&mst1->src,&mst1->dest);
@@ -269,6 +297,7 @@ void gestion_mst(mst_t*mst1,mst_t*mst2,mst_t*mst3,mst_t*mst4,SDL_Renderer*rend,S
     }
 
     if(mst2->est_affiche==0){
+
         SDL_RenderCopy(rend,monstre,&mst2->src,&mst2->dest);
         animation_ennemi_map_deux(&mst2->dest,&mst2->src,rend,monstre);
     }
@@ -277,6 +306,7 @@ void gestion_mst(mst_t*mst1,mst_t*mst2,mst_t*mst3,mst_t*mst4,SDL_Renderer*rend,S
         SDL_RenderCopy(rend,monstre,&mst3->src,&mst3->dest);
         animation_ennemi_map_trois(&mst3->dest,&mst3->src,rend,monstre);
     }
+
 
     if(mst4->est_affiche==0){
         SDL_RenderCopy(rend,monstre,&mst4->src,&mst4->dest);

@@ -84,6 +84,7 @@ int createmenu(TTF_Font* font, SDL_Renderer* rend){
         
         SDL_RenderPresent(rend);
         SDL_RenderClear(rend);
+        //SDL_DestroyRenderer(rend);
 
        SDL_Event event;
        while(!boolMenu)
@@ -151,6 +152,7 @@ int createmenu(TTF_Font* font, SDL_Renderer* rend){
         SDL_DestroyTexture(menuTex2);
         //Mix_FreeMusic(son);
         SDL_DestroyTexture(fond);
+        SDL_DestroyRenderer(rend);
 
                 //if(1000/30>(SDL_GetTicks()-time)){
                        // SDL_Delay(1000/30-(SDL_GetTicks()-time));

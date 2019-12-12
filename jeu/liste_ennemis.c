@@ -188,7 +188,7 @@ int rand_a_b(int a,int b){
     return rand()%(b-a)+a;
 }
 
-void animation_ennemi_map(SDL_Rect*dest,SDL_Rect*src,SDL_Renderer* rend,SDL_Texture* text){
+/*void animation_ennemi_map(SDL_Rect*dest,SDL_Rect*src,SDL_Renderer* rend,SDL_Texture* text){
     
         deplacement_ennemis(dest,src);
         animation_ennemis(&src);
@@ -216,6 +216,6 @@ void animation_ennemi_map_quatre(SDL_Rect*dest,SDL_Rect*src,SDL_Renderer* rend,S
     
 } 
 
-
+*/
 
 

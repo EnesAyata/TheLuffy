@@ -169,7 +169,7 @@ SDL_Rect monstreR={100,100,TLuffy,TLuffy};
 
   
   int imenu;// = createmenu(font, rend);
-  //imenu= createmenu(font, rend);
+  imenu= createmenu(font, rend);
   if(imenu == 1){
     terminer = true;
   }
@@ -470,7 +470,7 @@ char** tab2DDeplacement;
   
   }
   // Quitter SDL
-  //freeList(listBf);
+  freeList(listBf);
   SDL_DestroyTexture(fond);
   SDL_DestroyTexture(luffy);
   SDL_DestroyTexture(monstre);
