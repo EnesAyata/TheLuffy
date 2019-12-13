@@ -4,8 +4,8 @@
 int main(int argc, char *argv[])
 {
 
-  SDL_Window* fenetre; // Déclaration de la fenêtre
-  SDL_Event evenements; // Événements liés à la fenêtre
+  SDL_Window* fenetre; 
+  SDL_Event evenements; 
   SDL_Renderer* rend;
   SDL_Texture* fond;
   SDL_Texture* luffy;
@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
   SDL_Texture* monstre_trois;
   SDL_Texture*tiles;
 
-  if(SDL_Init(SDL_INIT_VIDEO) < 0) // Initialisation de la SDL
+  if(SDL_Init(SDL_INIT_VIDEO) < 0) 
   {
     printf("Erreur d’initialisation de la SDL: %s",SDL_GetError());
     SDL_Quit();
@@ -25,43 +25,25 @@ int main(int argc, char *argv[])
 
   fenetre = SDL_CreateWindow("TheLuffy", SDL_WINDOWPOS_CENTERED,
   SDL_WINDOWPOS_CENTERED, 500, 475, SDL_WINDOW_RESIZABLE);//taille dynamique avec taille fichier + erreur lors de caract nn autorisé
-  if(fenetre == NULL) // En cas d’erreur 
-
-
-
-
+  if(fenetre == NULL)
   {
     printf("Erreur de la creation d’une fenetre: %s",SDL_GetError());
     SDL_Quit();
     return EXIT_FAILURE;
   }
-  //créer un conexte de rendu pr image
   Uint32 render_flags = SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC;
   rend = SDL_CreateRenderer(fenetre, -1, render_flags);
 
-  // Convertir la surface de l’image au format texture avant de l’appliquer
-  //text = SDL_CreateTextureFromSurface(rend, surface);
-  // Copier (une partie de) la texture dans le renderer
-
-  // Récupérer les attributs d’une texture
-
-  // Charger l’image
   fond = charger_image( "ressources/bleu.bmp", rend);
-
-  // Charger l’image avec la transparence
   Uint8 r = 255, g = 255, b = 255;//palette rgb
 
-
-  /* SDL_Rect destination persos */
-  //afficher luffy 
   SDL_Rect DestL;
   DestL.x = 70;
   DestL.y = 100;
   DestL.w =TLuffy;
   DestL.h = TLuffy;
 
-  //afficher Monstres
-SDL_Rect monstreR={100,100,TLuffy,TLuffy};
+  SDL_Rect monstreR={100,100,TLuffy,TLuffy};
   SDL_Rect monstreR_deux={0,50,TLuffy,TLuffy};
   SDL_Rect monstreR_trois={100,50,TLuffy,TLuffy};
 
@@ -72,12 +54,8 @@ SDL_Rect monstreR={100,100,TLuffy,TLuffy};
 
   /* *********************************************** */
 
-
-  //chargement sprite luffy
   luffy = charger_image_transparente("ressources/liffyR.bmp", rend,r,g,b);
 
-
-  //chargement sprites monstres
   monstre = charger_image_transparente("images/chrono.bmp",rend,r,g,b);
   monstre_deux = charger_image_transparente("images/oui.bmp",rend,r,g,b);
   monstre_trois = charger_image_transparente("images/serge.bmp",rend,r,g,b);
@@ -242,8 +220,6 @@ map_t*map4= cree_map(tab2DMap4,rend,luffy,tiles,"map.txt");
   insertion_ennemis(liste_ennemis, ennemi2);
   insertion_ennemis(liste_ennemis, ennemi3);
 
-  mst_t*mst1=creemst(map1_mst1_dest,map1_mst1_src);
-
   mst_t*map1_mst1=creemst(map1_mst1_dest,map1_mst1_src);
   mst_t*map1_mst2=creemst(map1_mst2_dest,map1_mst2_src);
   mst_t*map1_mst3=creemst(map1_mst3_dest,map1_mst3_src);
@@ -288,47 +264,22 @@ char** tab2DDeplacement;
       //Différents monstres
         //animation_ennemi_map(&map1_mst1_dest,&map1_mst1_src,rend,monstre_deux);
 
-      gestion_mst(map1_mst1,map1_mst2,map1_mst3,map1_mst4,rend,monstre,listBf);
-        
-
-        //SDL_RenderCopy(rend,monstre_deux,&mst1->dest,&mst1->src);
-        //animation_ennemi_map(&map1_mst2_dest,&map1_mst2_src,rend,monstre_deux); 
-        //SDL_RenderCopy(rend,monstre,&map1_mst2_src,&map1_mst2_dest);
-
-        //animation_ennemi_map(&map1_mst3_dest,&map1_mst3_src,rend,monstre_deux); 
-        //SDL_RenderCopy(rend,monstre_deux,&map1_mst3_src,&map1_mst3_dest);
-
-        //animation_ennemi_map(&map1_mst4_dest,&map1_mst4_src,rend,monstre_deux); 
-        //SDL_RenderCopy(rend,monstre_deux,&map1_mst4_src,&map1_mst4_dest);
-
-        atk_luffy(listBf,rend,perso);
-
-        
-        /////////////////
-      //deplacement_ennemis(&DestM,&monstreR);
-      //deplacement_ennemis_deux(&DestM_deux,&monstreR_deux);
-      //deplacement_ennemis_trois(&DestM_trois,&monstreR_trois);
-      //animation_ennemis(&monstreR);  
-      //animation_ennemis(&monstreR_deux);
-
-      //animation_ennemis(&monstreR_trois);   
-      //SDL_RenderCopy(rend,monstre,&monstreR,&DestM);
-      //SDL_RenderCopy(rend,monstre_trois,&monstreR_trois,&DestM_trois);
+      gestion_mst(map1_mst1,map1_mst2,map1_mst3,map1_mst4,rend,monstre,listBf,perso);
+      atk_luffy(listBf,rend,perso);
       }
     else if(perso->map==2){
-      tab2DDeplacement=tab2DMap2;
-      afficher_map_struct(map2,rend,luffy);//,"level.txt");
-      detection_porte(tab2DMap2,&DestL,perso,&n,&m); 
-        gestion_mst(map2_mst1,map2_mst2,map2_mst3,map2_mst4,rend,monstre,listBf);
 
+        tab2DDeplacement=tab2DMap2;
+        afficher_map_struct(map2,rend,luffy);//,"level.txt");
+        detection_porte(tab2DMap2,&DestL,perso,&n,&m); 
+        gestion_mst(map2_mst1,map2_mst2,map2_mst3,map2_mst4,rend,monstre,listBf,perso);
         atk_luffy(listBf,rend,perso);
       }
       else if(perso->map==3){
-              tab2DDeplacement=tab2DMap3;
-      afficher_map_struct(map3,rend,luffy);//,"level.txt");
-      detection_porte(tab2DMap3,&DestL,perso,&n,&m);  
-            gestion_mst(map3_mst1,map3_mst2,map3_mst3,map3_mst4,rend,monstre,listBf);
-
+        tab2DDeplacement=tab2DMap3;
+        afficher_map_struct(map3,rend,luffy);//,"level.txt");
+        detection_porte(tab2DMap3,&DestL,perso,&n,&m);  
+        gestion_mst(map3_mst1,map3_mst2,map3_mst3,map3_mst4,rend,monstre,listBf,perso);
         atk_luffy(listBf,rend,perso);
       }
       else if(perso->map==4){
@@ -336,7 +287,7 @@ char** tab2DDeplacement;
       afficher_map_struct(map4,rend,luffy);//,"level.txt");
       detection_porte(tab2DMap4,&DestL,perso,&n,&m);  
 
-            gestion_mst(map4_mst1,map4_mst2,map4_mst3,map4_mst4,rend,monstre,listBf);
+            gestion_mst(map4_mst1,map4_mst2,map4_mst3,map4_mst4,rend,monstre,listBf,perso);
 
         atk_luffy(listBf,rend,perso);
       }
@@ -349,7 +300,7 @@ char** tab2DDeplacement;
     //print_monstre_list(liste_ennemis,rend);
     
 
-
+    printf("le score : expe %d argent %d \n",perso->experience,perso->argent);
     SDL_RenderCopy(rend,luffy,&luffyR,&DestL);
     //detection_porte(tab2DDeplacement,&DestL,perso,&n,&m);  
     //deplacement_ennemis(&DestM,&monstreR);
@@ -473,6 +424,7 @@ char** tab2DDeplacement;
   
   }
   // Quitter SDL
+  ecriture_score(listBf,perso);
   freeList(listBf);
   SDL_DestroyTexture(fond);
   SDL_DestroyTexture(luffy);

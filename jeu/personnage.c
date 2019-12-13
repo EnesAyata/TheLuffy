@@ -3,29 +3,18 @@
 
 
 void detection_porte(char** map,SDL_Rect* luffy,luffy_t* personnage,int* n,int* m){
-    int posLX= (((luffy->x+10))/TLuffy) ;//on crée un point au mileu de luffy
+    int posLX= (((luffy->x+10))/TLuffy) ;
     int posLY= (((luffy->y+10))/TLuffy) ;
-    //printf("pos en x %d et en y %d\n",luffy->x,luffy->y);
-    //printf("le caract actuel : %c \n",map[posLY][posLX]);
     if(map[posLY][posLX]=='?'){
         if(personnage->map==1)
-            personnage->map=2;//on change la map
+            personnage->map=2;
         else if(personnage->map==2)
-            personnage->map=3;//on change la map
+            personnage->map=3;
         else if(personnage->map==3)
-            personnage->map=4;//on change la map
+            personnage->map=4;
         luffy->x=0;
         luffy->y=0;
-        printf("La map %d",personnage->map);
-        //desallouer_tab_2D(map,n);
-        //taille_fichier("level.txt",&n,&m);
-        //tab2=allouer_tab_2D(n,m);
-        //map=lire_fichier("level.txt");
-        printf("ALLEZ ON Change ! \n");
         }
-
-    //printf("la map du j : %d \n",personnage->map);
-    
 }
 
 
@@ -42,7 +31,7 @@ luffy_t* creation_perso(luffy_t* j){
 }
 
 void desallouer_perso(luffy_t* perso){
-    free(perso);//a refaire car jsuis pas sur ?
+    free(perso);
 }
 
 void afficherL(luffy_t *perso){

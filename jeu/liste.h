@@ -8,7 +8,6 @@ typedef struct perso_s perso_t;
     SDL_Rect src;
     SDL_Rect dest;
     SDL_Texture* sprite;    
-    //feu_t*feu;
     int est_affiche;
     int deplacement;
     int vie;
@@ -21,7 +20,6 @@ typedef struct mst_s mst_t;
  struct mst_s{
     SDL_Rect src;
     SDL_Rect dest;
-    //feu_t*feu;
     int est_affiche;
     int vie;
 };
@@ -46,9 +44,10 @@ void animation_ennemi_map(SDL_Rect*dest,SDL_Rect*src,SDL_Renderer* rend,SDL_Text
 void animation_ennemi_map_deux(SDL_Rect*dest,SDL_Rect*src,SDL_Renderer* rend,SDL_Texture* text);
 void animation_ennemi_map_trois(SDL_Rect*dest,SDL_Rect*src,SDL_Renderer* rend,SDL_Texture* text);
 void animation_ennemi_map_quatre(SDL_Rect*dest,SDL_Rect*src,SDL_Renderer* rend,SDL_Texture* text);
-void gestion_mst(mst_t*mst1,mst_t*mst2,mst_t*mst3,mst_t*mst4,SDL_Renderer*rend,SDL_Texture* monstre,Liste_t*listBf);
-
+void gestion_mst(mst_t*mst1,mst_t*mst2,mst_t*mst3,mst_t*mst4,SDL_Renderer*rend,SDL_Texture* monstre,Liste_t*listBf,luffy_t*perso);
+void freeList(Liste_t*listBf);
 void colli_perso(SDL_Rect a, SDL_Rect b);
+void ecriture_score(Liste_t*list,luffy_t*luffy);
 
 
 #endif

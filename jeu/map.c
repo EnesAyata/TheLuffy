@@ -1,10 +1,9 @@
 #include "map.h"
 
-map_t* cree_map(char** tab2D,SDL_Renderer* rend,luffy_t*luffy,SDL_Texture*tiles,const char* nomMap){//,Liste_t*listBf){//,Liste_t*listBf){//ajoute liste chaine de mst ou bouel de feu 
+map_t* cree_map(char** tab2D,SDL_Renderer* rend,luffy_t*luffy,SDL_Texture*tiles,const char* nomMap){
 map_t*map= malloc(sizeof(map_t));
 int n,m;
 taille_fichier(nomMap,&n,&m);
-
 map->col=n;
 map->lig=m;
 map->luffy=luffy;
@@ -17,9 +16,9 @@ return map;
 void desallouer_map(map_t* map){
     free(map);
 }
+
 char** allouer_tab_2D(int n, int m){
     char** tab;
-    //char init=;
     tab=malloc(n*sizeof(char*));
     for(int i = 0; i < n; i++){
         tab[i] = malloc(m*sizeof(char*));
@@ -36,47 +35,29 @@ void afficher_tab_2D(char** tab,int n,int m){
 
     for(int i=0;i<n;i++){
         for(int j=0;j<m;j++){
-            
-                printf("%c ",(char)tab[i][j]);
-            
+            printf("%c ",(char)tab[i][j]);
         }
-        printf("je passe a la ligne");
-        printf("\n");
     }
 
 }
 
 char** affichage_map_tp(char** tab,int n,int m,SDL_Renderer* rend,SDL_Texture* tiles,luffy_t* perso){//avec la tp
-    //char** tab2;
     if(tab!=NULL){
         desallouer_tab_2D(tab,n);
     }
     if(perso->map==1){
-        //desallouer_tab_2D(tab,n);
-        //printf("Nv 1\n");
         tab=lire_fichier("map.txt");
         taille_fichier("map.txt",&n,&m);
         afficher_map(tab,n,m,rend,tiles);
         return tab;
-        //desallouer_tab_2D(tab2,n);
     }
     if(perso->map==2){
-        //printf("Nv 2\n");
-      //desallouer_tab_2D(tab,n);
       tab=lire_fichier("level.txt");
       taille_fichier("level.txt",&n,&m);
-      
-       // afficher_tab_2D(tab,n,m);
       afficher_map(tab,n,m,rend,tiles);
       return tab;
-      //desallouer_tab_2D(tab,n);
     }
-    return NULL;
-
-    //desallouer_tab_2D(tab2,n);
-    
-
-
+    return NULL;   
 }
 
 
@@ -85,35 +66,20 @@ void afficher_map(char** tab,int n,int m,SDL_Renderer* rend,SDL_Texture* tiles){
   SDL_Rect SrcR,DestL;
   int cpt;
   init_rect(&SrcR,&DestL);
- // DestL.x=64;//x en position a afficher
-  //DestL.y=64;//y en position a afficher "#$%&'()*+'-./0123!
-
-
   for(int i=0;i<n;i++){
         for(int j=0;j<m;j++){
-            cpt=(int)tab[i][j]-33;//tiles a afficher // 33 = 1;
-            
-
-
+            cpt=(int)tab[i][j]-33;
             if(tab[i][j]==' '){
-                //on affiche de la terre
-                //SrcR.x=0;
                 SDL_RenderCopy(rend,tiles,&SrcR,&DestL);
             }
             else if (cpt>=0 && cpt<NbTilesLargeur){
                 SrcR.x+=cpt*TailleTiles;
-                //SrcR.y+=32;
                 SDL_RenderCopy(rend,tiles,&SrcR,&DestL);
-          //tile.y=40*(j+1);
-          //SrcR.x=0;
             }
             else if(cpt>=NbTilesLargeur && cpt<NbTilesLargeur*2 ){
                 SrcR.x+=(cpt-NbTilesLargeur)*TailleTiles;
                 SrcR.y+=TailleTiles;
-                //printf(" le del %d , %d \n ",SrcR.x,SrcR.y);
-
                 SDL_RenderCopy(rend,tiles,&SrcR,&DestL);
-
             }
             else if(cpt>=NbTilesLargeur*2 && cpt<NbTilesLargeur*3 ){
                 SrcR.x+=(cpt-(NbTilesLargeur*2))*TailleTiles;
@@ -158,23 +124,16 @@ void afficher_map(char** tab,int n,int m,SDL_Renderer* rend,SDL_Texture* tiles){
             SrcR.x=0;
             DestL.x+=TailleTiles;
             SrcR.y=0;
-            
         }
         SrcR.y=0;
         DestL.x=0;
-        DestL.y+=TailleTiles;//on saute la ligne ""
-        
+        DestL.y+=TailleTiles;  
   }
-  //SDL_DestroyRenderer(rend);
-}
+  }
 
 
 void afficher_map_struct(map_t*map,SDL_Renderer*rend,SDL_Texture*tilesLuffy){
-    //tab2D=affichage_map_tp(tab2D,n,m,rend,tilesLuffy,map->luffy);
-    //afficher_map(tab2D,n,m,rend,tiles);
     char**tab2DT=lire_fichier(map->nomMap);
     afficher_map(tab2DT,map->lig,map->col,rend,map->tiles);
     map->tab2D=affichage_map_tp(tab2DT,map->lig,map->col,rend,tilesLuffy,map->luffy);
-
-    //afficher_map(tab2DT,map->lig,map->col,rend,map->tiles);
 }
