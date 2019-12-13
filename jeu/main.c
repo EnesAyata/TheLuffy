@@ -268,10 +268,12 @@ map_t*map4= cree_map(tab2DMap4,rend,luffy,tiles,"map.txt");
 char** tab2DDeplacement;
 
 
-
-//////////
+  /****** MUSIQUE DE FOND DU JEU */
+  Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+  Mix_Music * son_fond= Mix_LoadMUS("ressources/musique_fond.mp3");
   
-  // Boucle principale
+  
+  /* ************** BOUCLE PRINCIPALE ************ */
   while(!terminer)
   {
 
@@ -282,6 +284,7 @@ char** tab2DDeplacement;
       tab2DDeplacement=tab2DMap1;
       afficher_map_struct(map1,rend,luffy);//,"level.txt");
       detection_porte(tab2DMap1,&DestL,perso,&n,&m); 
+      Mix_PlayMusic(son_fond,-1);//-
       //Différents monstres
         //animation_ennemi_map(&map1_mst1_dest,&map1_mst1_src,rend,monstre_deux);
 
@@ -482,6 +485,7 @@ char** tab2DDeplacement;
   SDL_DestroyRenderer(rend); 
   SDL_DestroyWindow(fenetre);
   TTF_CloseFont(font);
+  Mix_FreeMusic(son_fond);
   TTF_Quit();
   SDL_Quit();
   return EXIT_SUCCESS;
