@@ -110,7 +110,7 @@ void afficherListe_map(Liste_ennemis_t*liste,SDL_Renderer*rend){
     SDL_Rect Src= {0,0,25,25};
     SDL_Texture*mst=charger_image("ressources/oui.bmp",rend);
     ennemi_t*ennemi=creeEntite_en1(Src,Dest,mst,10);
-    insertion_ennemis(liste,&ennemi);
+    insertion_ennemis(liste,ennemi);
 }
 
 void print_monstre_list(Liste_ennemis_t*list,SDL_Renderer*rend){

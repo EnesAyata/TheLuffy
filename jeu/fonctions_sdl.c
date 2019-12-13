@@ -211,8 +211,8 @@ void deplacement_ennemis(SDL_Rect* ennemis, SDL_Rect* regard){
         }break;
         case 0: if (ennemis->y+2 <= 475-TLuffy){
             ennemis->y+=2;
-            regard->x=TLuffy*3;
-            regard->y=TLuffy*3;
+            regard->x=0;
+            regard->y=0;
         }break;
         case 2: if (ennemis->x-2> 0){
             ennemis->x-=2;
@@ -221,8 +221,8 @@ void deplacement_ennemis(SDL_Rect* ennemis, SDL_Rect* regard){
         }break;
         case 3: if (ennemis->y-2>0){
             ennemis->y-=2;
-            regard->x=0;
-            regard->y=0;
+            regard->x=TLuffy*3;
+            regard->y=TLuffy*3;
         }break;
     }
 }
@@ -239,8 +239,8 @@ void deplacement_ennemis_deux(SDL_Rect* ennemis, SDL_Rect* regard){
         }break;
         case 3: if (ennemis->y+2 <= 475-TLuffy){
             ennemis->y+=2;
-            regard->x=TLuffy*3;
-            regard->y=TLuffy*3;
+            regard->x=0;
+            regard->y=0;
         }break;
         case 2: if (ennemis->x-2> 0){
             ennemis->x-=2;
@@ -249,8 +249,8 @@ void deplacement_ennemis_deux(SDL_Rect* ennemis, SDL_Rect* regard){
         }break;
         case 1: if (ennemis->y-2>0){
             ennemis->y-=2;
-            regard->x=0;
-            regard->y=0;
+            regard->x=TLuffy*3;
+            regard->y=TLuffy*3;
         }break;
     }     
 }
@@ -267,8 +267,8 @@ void deplacement_ennemis_trois(SDL_Rect* ennemis, SDL_Rect* regard){
         }break;
         case 1: if (ennemis->y+2 <= 475-TLuffy){
             ennemis->y+=2;
-            regard->x=TLuffy*3;
-            regard->y=TLuffy*3;
+            regard->x=0;
+            regard->y=0;
         }break;
         case 2: if (ennemis->x-2> 0){
             ennemis->x-=2;
@@ -277,8 +277,8 @@ void deplacement_ennemis_trois(SDL_Rect* ennemis, SDL_Rect* regard){
         }break;
         case 3: if (ennemis->y-2>0){
             ennemis->y-=2;
-            regard->x=0;
-            regard->y=0;
+            regard->x=TLuffy*3;
+            regard->y=TLuffy*3;
         }break;
     }  
 }
@@ -295,8 +295,8 @@ void deplacement_ennemis_quatre(SDL_Rect* ennemis, SDL_Rect* regard){
         }break;
         case 3: if (ennemis->y+2 <= 475-TLuffy){
             ennemis->y+=2;
-            regard->x=TLuffy*3;
-            regard->y=TLuffy*3;
+            regard->x=0;
+            regard->y=0;
         }break;
         case 1: if (ennemis->x-2> 0){
             ennemis->x-=2;
@@ -305,8 +305,8 @@ void deplacement_ennemis_quatre(SDL_Rect* ennemis, SDL_Rect* regard){
         }break;
         case 0: if (ennemis->y-2>0){
             ennemis->y-=2;
-            regard->x=0;
-            regard->y=0;
+            regard->x=TLuffy*3;
+            regard->y=TLuffy*3;
         }break;
     }      
 }
