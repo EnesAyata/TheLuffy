@@ -42,9 +42,9 @@ void afficher_tab_2D(char** tab,int n,int m){
 }
 
 char** affichage_map_tp(char** tab,int n,int m,SDL_Renderer* rend,SDL_Texture* tiles,luffy_t* perso){//avec la tp
-    if(tab!=NULL){
+    /*if(tab!=NULL){
         desallouer_tab_2D(tab,n);
-    }
+    }*/
     if(perso->map==1){
         tab=lire_fichier("map.txt");
         taille_fichier("map.txt",&n,&m);
@@ -63,13 +63,16 @@ char** affichage_map_tp(char** tab,int n,int m,SDL_Renderer* rend,SDL_Texture* t
 
 void afficher_map(char** tab,int n,int m,SDL_Renderer* rend,SDL_Texture* tiles){
 
-  SDL_Rect SrcR,DestL;
-  int cpt;
+  //SDL_Rect SrcR,DestL;
+  SDL_Rect SrcR = {100,100,TLuffy,TLuffy};
+  SDL_Rect DestL = {100,100,TLuffy,TLuffy};
+  int cpt =0;
+  char** temp= tab;
   init_rect(&SrcR,&DestL);
   for(int i=0;i<n;i++){
         for(int j=0;j<m;j++){
-            cpt=(int)tab[i][j]-33;
-            if(tab[i][j]==' '){
+            cpt=(int)temp[i][j]-33;
+            if(temp[i][j]==' '){
                 SDL_RenderCopy(rend,tiles,&SrcR,&DestL);
             }
             else if (cpt>=0 && cpt<NbTilesLargeur){
@@ -129,6 +132,7 @@ void afficher_map(char** tab,int n,int m,SDL_Renderer* rend,SDL_Texture* tiles){
         DestL.x=0;
         DestL.y+=TailleTiles;  
   }
+  
   }
 
 
@@ -136,4 +140,5 @@ void afficher_map_struct(map_t*map,SDL_Renderer*rend,SDL_Texture*tilesLuffy){
     char**tab2DT=lire_fichier(map->nomMap);
     afficher_map(tab2DT,map->lig,map->col,rend,map->tiles);
     map->tab2D=affichage_map_tp(tab2DT,map->lig,map->col,rend,tilesLuffy,map->luffy);
+    desallouer_tab_2D(tab2DT,20);
 }

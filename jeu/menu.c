@@ -51,7 +51,7 @@ int createmenu(TTF_Font* font, SDL_Renderer* rend){
         pos2.y = 250;
         pos2.w = menu2w;
         pos2.h=menu2h;
-        
+
         SDL_RenderCopy(rend, fond, NULL ,&fond_pos);
         SDL_RenderCopy(rend, menuTex1, NULL ,&pos1);
         SDL_RenderCopy(rend, menuTex2, NULL ,&pos2);
@@ -98,8 +98,12 @@ int createmenu(TTF_Font* font, SDL_Renderer* rend){
                                 
                         }
         }
+        free(label1);
+        free(label2);
+        Mix_FreeMusic(son);
         SDL_FreeSurface(menu1);
         SDL_FreeSurface(menu2);
+        SDL_FreeSurface(fond_surface);
         SDL_DestroyTexture(menuTex1);
         SDL_DestroyTexture(menuTex2);
         SDL_DestroyTexture(fond);

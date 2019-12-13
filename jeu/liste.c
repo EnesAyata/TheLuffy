@@ -76,8 +76,9 @@ void freeList(Liste_t*listBf){
     for(int i=0;i<listBf->lenght;i++){
         if(perso!=NULL){
             suivant=perso->suivant;
+            SDL_DestroyTexture(perso->sprite);
             free(perso);
-            perso=perso->suivant;
+            perso=suivant;
         }
     }
 }
@@ -138,7 +139,7 @@ void atk_luffy(Liste_t*listBf,SDL_Renderer*rend,luffy_t*luffy){
             actuel=actuel->suivant;
           }
       }
-          return 0;
+          
 }
 
 
@@ -189,7 +190,8 @@ void gestion_mst(mst_t*mst1,mst_t*mst2,mst_t*mst3,mst_t*mst4,SDL_Renderer*rend,S
         animation_ennemi_map_quatre(&mst4->dest,&mst4->src,rend,monstre);
     }
 
-    perso_t*actuel=listBf->premier;
+    perso_t*actuel;
+    actuel = listBf->premier;
         for(int i=0;i<listBf->lenght;i++){
           if(actuel!=NULL){
             if(check_colli(actuel->dest,mst1->dest) && actuel->est_affiche==0){
@@ -249,5 +251,5 @@ void ecriture_score(Liste_t*list,luffy_t*luffy){
         fclose(fichier);
     }
  
-    return 0;
+    
 }

@@ -1,5 +1,5 @@
 
-#include "liste_ennemis.h"
+#include "liste.h"
 
 int main(int argc, char *argv[])
 {
@@ -44,15 +44,7 @@ int main(int argc, char *argv[])
   DestL.w =TLuffy;
   DestL.h = TLuffy;
 
-  SDL_Rect monstreR={100,100,TLuffy,TLuffy};
-  SDL_Rect monstreR_deux={0,50,TLuffy,TLuffy};
-  SDL_Rect monstreR_trois={100,50,TLuffy,TLuffy};
-  SDL_Rect monstreR_q={150,50,TLuffy,TLuffy};
-
-  SDL_Rect DestM={100,100,TLuffy};
-  SDL_Rect DestM_deux={0,50,TLuffy,TLuffy};
-  SDL_Rect DestM_trois={100,50,TLuffy,TLuffy};
-  SDL_Rect DestM_q={150,50,TLuffy,TLuffy};
+  
 
 
   /* *********************************************** */
@@ -175,18 +167,13 @@ int main(int argc, char *argv[])
 
 
 
-SDL_Texture*feu=charger_image("ressources/feu.bmp",rend);
+
 //SDL_Texture*feu=charger_image_transparente("ressources/feu.bmp",rend,r,g,b);
 
 
 
 //feu_t*feuAtk=init_feu(feu,rend);
-SDL_Rect bouleFeuDest= {0,0,25,25};
-SDL_Rect bouleFeuSrc= {0,0,25,25};
-//perso_t*boule1=creeEntite(bouleFeuSrc,bouleFeuDest,feu,10);
-bouleFeuDest.x+=25;
-bouleFeuDest.y+=25;
-//perso_t*boule2=creeEntite(bouleFeuSrc,bouleFeuDest,feu,2);
+
 //insertion(listBf,boule1);
 //insertion(listBf,boule2);
 
@@ -195,15 +182,7 @@ bouleFeuDest.y+=25;
 /* **************************** */
 //test affichage monstres via listes chaînées
 
-Liste_ennemis_t* liste_ennemis= initialisation_ennemi();
-ennemi_t* ennemi1 = creeEntite_en1(monstreR,DestM,monstre,10);
-ennemi_t* ennemi2 = creeEntite_en1(monstreR_deux,DestM_deux,monstre_deux,10);
-ennemi_t* ennemi3 = creeEntite_en1(monstreR_trois,DestM_trois,monstre_trois,10);
-ennemi_t* ennemi4 = creeEntite_en1(monstreR_q,DestM_q,monstre_quatre,10);
-//insertion_ennemis(liste_ennemis, ennemi1);
-//insertion_ennemis(liste_ennemis, ennemi2);
-//insertion_ennemis(liste_ennemis, ennemi3);
-ennemi_t* monstre_actu;
+
 
 //afficherListe_en(liste_ennemis);
 
@@ -223,10 +202,7 @@ map_t*map4= cree_map(tab2DMap4,rend,luffy,tiles,"map.txt");
 
 //// TEST AVEC MST 
 
-  insertion_ennemis(liste_ennemis, ennemi1);
-  insertion_ennemis(liste_ennemis, ennemi2);
-  insertion_ennemis(liste_ennemis, ennemi3);
-  insertion_ennemis(liste_ennemis, ennemi4);
+  
   
 
   mst_t*map1_mst1=creemst(map1_mst1_dest,map1_mst1_src);
@@ -306,7 +282,7 @@ char** tab2DDeplacement;
     //print_monstre_list(liste_ennemis,rend);
     
 
-    printf("le score : expe %d argent %d \n",perso->experience,perso->argent);
+    //printf("le score : expe %d argent %d \n",perso->experience,perso->argent);
     SDL_RenderCopy(rend,luffy,&luffyR,&DestL);
     //detection_porte(tab2DDeplacement,&DestL,perso,&n,&m);  
     //deplacement_ennemis(&DestM,&monstreR);
@@ -432,12 +408,18 @@ char** tab2DDeplacement;
   // Quitter SDL
   ecriture_score(listBf,perso);
   freeList(listBf);
+  desallouer_tab_2D(tab2DMap1,20);
+  desallouer_tab_2D(tab2DMap2,20);
+  desallouer_tab_2D(tab2DMap3,20);
+  desallouer_tab_2D(tab2DMap4,20);
+  desallouer_perso(perso);
   SDL_DestroyTexture(fond);
   SDL_DestroyTexture(luffy);
   SDL_DestroyTexture(monstre);
   SDL_DestroyTexture(monstre_deux);
   SDL_DestroyTexture(monstre_trois);
   SDL_DestroyTexture(monstre_quatre);
+
   //SDL_DestroyTexture(text);
   //freeListEn(liste_ennemis);
   SDL_DestroyTexture(tiles);
