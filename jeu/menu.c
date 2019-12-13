@@ -51,6 +51,7 @@ int createmenu(TTF_Font* font, SDL_Renderer* rend){
         pos2.y = 250;
         pos2.w = menu2w;
         pos2.h=menu2h;
+        
         SDL_RenderCopy(rend, fond, NULL ,&fond_pos);
         SDL_RenderCopy(rend, menuTex1, NULL ,&pos1);
         SDL_RenderCopy(rend, menuTex2, NULL ,&pos2);

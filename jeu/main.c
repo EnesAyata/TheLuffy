@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
   SDL_Texture* monstre;
   SDL_Texture* monstre_deux;
   SDL_Texture* monstre_trois;
+  SDL_Texture* monstre_quatre;
   SDL_Texture*tiles;
 
   if(SDL_Init(SDL_INIT_VIDEO) < 0) 
@@ -46,10 +47,12 @@ int main(int argc, char *argv[])
   SDL_Rect monstreR={100,100,TLuffy,TLuffy};
   SDL_Rect monstreR_deux={0,50,TLuffy,TLuffy};
   SDL_Rect monstreR_trois={100,50,TLuffy,TLuffy};
+  SDL_Rect monstreR_q={150,50,TLuffy,TLuffy};
 
   SDL_Rect DestM={100,100,TLuffy};
   SDL_Rect DestM_deux={0,50,TLuffy,TLuffy};
   SDL_Rect DestM_trois={100,50,TLuffy,TLuffy};
+  SDL_Rect DestM_q={150,50,TLuffy,TLuffy};
 
 
   /* *********************************************** */
@@ -59,6 +62,9 @@ int main(int argc, char *argv[])
   monstre = charger_image_transparente("images/chrono.bmp",rend,r,g,b);
   monstre_deux = charger_image_transparente("images/oui.bmp",rend,r,g,b);
   monstre_trois = charger_image_transparente("images/serge.bmp",rend,r,g,b);
+  monstre_trois = charger_image_transparente("images/chrono.bmp",rend,r,g,b);
+  monstre_quatre = charger_image_transparente("images/grah.bmp",rend, r, g, b);
+
 
 
   /* sdl_rect pour les persos */
@@ -193,6 +199,7 @@ Liste_ennemis_t* liste_ennemis= initialisation_ennemi();
 ennemi_t* ennemi1 = creeEntite_en1(monstreR,DestM,monstre,10);
 ennemi_t* ennemi2 = creeEntite_en1(monstreR_deux,DestM_deux,monstre_deux,10);
 ennemi_t* ennemi3 = creeEntite_en1(monstreR_trois,DestM_trois,monstre_trois,10);
+ennemi_t* ennemi4 = creeEntite_en1(monstreR_q,DestM_q,monstre_quatre,10);
 //insertion_ennemis(liste_ennemis, ennemi1);
 //insertion_ennemis(liste_ennemis, ennemi2);
 //insertion_ennemis(liste_ennemis, ennemi3);
@@ -219,6 +226,8 @@ map_t*map4= cree_map(tab2DMap4,rend,luffy,tiles,"map.txt");
   insertion_ennemis(liste_ennemis, ennemi1);
   insertion_ennemis(liste_ennemis, ennemi2);
   insertion_ennemis(liste_ennemis, ennemi3);
+  insertion_ennemis(liste_ennemis, ennemi4);
+  
 
   mst_t*map1_mst1=creemst(map1_mst1_dest,map1_mst1_src);
   mst_t*map1_mst2=creemst(map1_mst2_dest,map1_mst2_src);
@@ -244,26 +253,25 @@ map_t*map4= cree_map(tab2DMap4,rend,luffy,tiles,"map.txt");
 char** tab2DDeplacement;
 
 
-  /****** MUSIQUE DE FOND DU JEU */
+  /****** MUSIQUE DE FOND DU JEU  ET BRUITAGE ENNEMI*/
   Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
   Mix_Music * son_fond= Mix_LoadMUS("ressources/musique_fond.mp3");
-  
+  Mix_PlayMusic(son_fond,-1);
+  Mix_Music * son_en=Mix_LoadMUS("ressources/cri.mp3");
   
   /* ************** BOUCLE PRINCIPALE ************ */
   while(!terminer)
   {
-
+    
       
-  while( SDL_PollEvent( &evenements ) )
+  while( SDL_PollEvent( &evenements ) ){
     SDL_RenderClear(rend);
+  }
     if(perso->map==1){
       tab2DDeplacement=tab2DMap1;
       afficher_map_struct(map1,rend,luffy);//,"level.txt");
       detection_porte(tab2DMap1,&DestL,perso,&n,&m); 
-      Mix_PlayMusic(son_fond,-1);//-
-      //Différents monstres
-        //animation_ennemi_map(&map1_mst1_dest,&map1_mst1_src,rend,monstre_deux);
-
+      
       gestion_mst(map1_mst1,map1_mst2,map1_mst3,map1_mst4,rend,monstre,listBf,perso);
       atk_luffy(listBf,rend,perso);
       }
@@ -272,23 +280,21 @@ char** tab2DDeplacement;
         tab2DDeplacement=tab2DMap2;
         afficher_map_struct(map2,rend,luffy);//,"level.txt");
         detection_porte(tab2DMap2,&DestL,perso,&n,&m); 
-        gestion_mst(map2_mst1,map2_mst2,map2_mst3,map2_mst4,rend,monstre,listBf,perso);
+        gestion_mst(map2_mst1,map2_mst2,map2_mst3,map2_mst4,rend,monstre_deux,listBf,perso);
         atk_luffy(listBf,rend,perso);
       }
       else if(perso->map==3){
         tab2DDeplacement=tab2DMap3;
         afficher_map_struct(map3,rend,luffy);//,"level.txt");
         detection_porte(tab2DMap3,&DestL,perso,&n,&m);  
-        gestion_mst(map3_mst1,map3_mst2,map3_mst3,map3_mst4,rend,monstre,listBf,perso);
+        gestion_mst(map3_mst1,map3_mst2,map3_mst3,map3_mst4,rend,monstre_trois,listBf,perso);
         atk_luffy(listBf,rend,perso);
       }
       else if(perso->map==4){
-              tab2DDeplacement=tab2DMap4;
-      afficher_map_struct(map4,rend,luffy);//,"level.txt");
-      detection_porte(tab2DMap4,&DestL,perso,&n,&m);  
-
-            gestion_mst(map4_mst1,map4_mst2,map4_mst3,map4_mst4,rend,monstre,listBf,perso);
-
+        tab2DDeplacement=tab2DMap4;
+        afficher_map_struct(map4,rend,luffy);//,"level.txt");
+        detection_porte(tab2DMap4,&DestL,perso,&n,&m);  
+        gestion_mst(map4_mst1,map4_mst2,map4_mst3,map4_mst4,rend,monstre_quatre,listBf,perso);
         atk_luffy(listBf,rend,perso);
       }
 
@@ -409,7 +415,7 @@ char** tab2DDeplacement;
     
     case SDLK_RCTRL:NewBouleFeu(listBf,&DestL,rend,perso);break;
 
-    case SDLK_LEFT:/*launch_ball(feuAtk,1,&DestM,&DestL,rend)*/perso->deplacement=0;deplacement_Luffy(0,&DestL,&luffyR,tab2DDeplacement);animation_Luffy(&luffyR); break;
+    case SDLK_LEFT:perso->deplacement=0;deplacement_Luffy(0,&DestL,&luffyR,tab2DDeplacement);animation_Luffy(&luffyR); break;
     case SDLK_RIGHT: perso->deplacement=1;deplacement_Luffy(1,&DestL,&luffyR,tab2DDeplacement);animation_Luffy(&luffyR); break;
     case SDLK_UP:    perso->deplacement=2;deplacement_Luffy(2,&DestL,&luffyR,tab2DDeplacement);animation_Luffy(&luffyR);break;
     case SDLK_DOWN: perso->deplacement=3;deplacement_Luffy(3,&DestL,&luffyR,tab2DDeplacement);animation_Luffy(&luffyR); break;
@@ -431,6 +437,7 @@ char** tab2DDeplacement;
   SDL_DestroyTexture(monstre);
   SDL_DestroyTexture(monstre_deux);
   SDL_DestroyTexture(monstre_trois);
+  SDL_DestroyTexture(monstre_quatre);
   //SDL_DestroyTexture(text);
   //freeListEn(liste_ennemis);
   SDL_DestroyTexture(tiles);

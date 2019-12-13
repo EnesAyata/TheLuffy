@@ -226,7 +226,9 @@ void gestion_mst(mst_t*mst1,mst_t*mst2,mst_t*mst3,mst_t*mst4,SDL_Renderer*rend,S
             }
           } 
           actuel=actuel->suivant;
+
         }
+        
 }
 
 
