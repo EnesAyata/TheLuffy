@@ -1,12 +1,4 @@
 SCORE DU JOUEUR POUR TheLuffy : 
-<<<<<<< HEAD
-<<<<<<< HEAD
-Vous avez utilisé 1065 boules de feu pour venir à bout des ennemisVous avez 95640 argent et 191280 experience 
-=======
-Vous avez utilisé 548 boules de feu pour venir à bout des ennemisVous avez 2605 argent et 5210 experience 
->>>>>>> master
-=======
-Vous avez utilisé 0 boules de feu pour venir à bout des ennemisVous avez 0 argent et 0 experience 
->>>>>>> master
+Vous avez utilisé 304 boules de feu pour venir à bout des ennemisVous avez 15565 argent et 31130 experience 
 Vous avez fini le jeu avec 100 de point de vie.
  

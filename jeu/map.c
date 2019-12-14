@@ -32,19 +32,14 @@ char** allouer_tab_2D(int n, int m){
 }
 
 void afficher_tab_2D(char** tab,int n,int m){
-
     for(int i=0;i<n;i++){
         for(int j=0;j<m;j++){
             printf("%c ",(char)tab[i][j]);
         }
     }
-
 }
 
 char** affichage_map_tp(char** tab,int n,int m,SDL_Renderer* rend,SDL_Texture* tiles,luffy_t* perso){//avec la tp
-    /*if(tab!=NULL){
-        desallouer_tab_2D(tab,n);
-    }*/
     if(perso->map==1){
         tab=lire_fichier("map.txt");
         taille_fichier("map.txt",&n,&m);
@@ -62,8 +57,6 @@ char** affichage_map_tp(char** tab,int n,int m,SDL_Renderer* rend,SDL_Texture* t
 
 
 void afficher_map(char** tab,int n,int m,SDL_Renderer* rend,SDL_Texture* tiles){
-
-  //SDL_Rect SrcR,DestL;
   SDL_Rect SrcR = {100,100,TLuffy,TLuffy};
   SDL_Rect DestL = {100,100,TLuffy,TLuffy};
   int cpt =0;
@@ -132,7 +125,7 @@ void afficher_map(char** tab,int n,int m,SDL_Renderer* rend,SDL_Texture* tiles){
         DestL.x=0;
         DestL.y+=TailleTiles;  
   }
-  
+
   }
 
 

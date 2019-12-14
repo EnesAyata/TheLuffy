@@ -224,9 +224,18 @@ void gestion_mst(mst_t*mst1,mst_t*mst2,mst_t*mst3,mst_t*mst4,SDL_Renderer*rend,S
                 perso->experience+=10;
                 mst4->est_affiche=1;
               }
-              else{mst4->vie-=1; printf("iL Y A CONTACT");}
+              else{mst4->vie-=1;
             }
-            if(check_colli(sprite,mst1->dest)){
+
+            
+            
+
+          } 
+          actuel=actuel->suivant;
+
+        }
+        }
+        if(check_colli(sprite,mst1->dest)){
                 if(mst1->vie<0 ){
                 perso->argent+=5;
                 perso->experience+=10;
@@ -266,12 +275,6 @@ void gestion_mst(mst_t*mst1,mst_t*mst2,mst_t*mst3,mst_t*mst4,SDL_Renderer*rend,S
                 
                 else{mst4->vie-=1;}
             }
-            
-
-          } 
-          actuel=actuel->suivant;
-
-        }
         
 }
 
