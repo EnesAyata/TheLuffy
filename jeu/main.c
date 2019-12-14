@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
   monstre = charger_image_transparente("images/chrono.bmp",rend,r,g,b);
   monstre_deux = charger_image_transparente("images/oui.bmp",rend,r,g,b);
   monstre_trois = charger_image_transparente("images/serge.bmp",rend,r,g,b);
-  monstre_trois = charger_image_transparente("images/chrono.bmp",rend,r,g,b);
+  //monstre_trois = charger_image_transparente("images/chrono.bmp",rend,r,g,b);
   monstre_quatre = charger_image_transparente("images/grah.bmp",rend, r, g, b);
 
 
@@ -141,7 +141,7 @@ int main(int argc, char *argv[])
 /* ***** CREATION MENU ***** */
   TTF_Init();
   TTF_Font *font;
-  font =TTF_OpenFont("ressources/oswald.ttf", 30);
+  font =TTF_OpenFont("ressources/Pokemon_Solid.ttf", 30);
 
   
   int imenu;// = createmenu(font, rend);
@@ -153,7 +153,13 @@ int main(int argc, char *argv[])
 
 
 
-/* ***** ***** ***** */    
+/* ***** ***** ***** */  
+
+/* ***** CREATION ECRAN FIN ****/
+int iecran_fin =0;
+
+
+/* *************** */
 
 
   //test création luffy 
@@ -272,6 +278,10 @@ char** tab2DDeplacement;
         detection_porte(tab2DMap4,&DestL,perso,&n,&m);  
         gestion_mst(map4_mst1,map4_mst2,map4_mst3,map4_mst4,rend,monstre_quatre,listBf,perso, DestL);
         atk_luffy(listBf,rend,perso);
+        
+        if(map4_mst1->est_affiche==1 && map4_mst2->est_affiche==1 && map4_mst3->est_affiche==1 && map4_mst4->est_affiche==1 && iecran_fin ==0){
+              iecran_fin=create_exit(font,rend);
+        }
       }
 
           //deplacement_ennemis(&(liste_ennemis->premier->src),&liste_ennemis->premier->dest);

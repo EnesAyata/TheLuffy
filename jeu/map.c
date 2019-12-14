@@ -112,7 +112,7 @@ void afficher_map(char** tab,int n,int m,SDL_Renderer* rend,SDL_Texture* tiles){
                 SrcR.y+=TailleTiles*8;
                 SDL_RenderCopy(rend,tiles,&SrcR,&DestL);
             }
-            else if(cpt>=NbTilesLargeur*9 /*&& cpt<NbTilesLargeur*9*/){
+            else if(cpt>=NbTilesLargeur*9 ){
                 SrcR.x+=(cpt-(NbTilesLargeur*9))*TailleTiles;
                 SrcR.y+=TailleTiles*9;
                 SDL_RenderCopy(rend,tiles,&SrcR,&DestL);

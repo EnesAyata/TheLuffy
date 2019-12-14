@@ -16,7 +16,7 @@
 /**
  * \file world.h
  * \brief fichier header du monde pricipal
- * \author Enes AYATA
+ * \author Enes AYATA / Alpaslan GEBESOGLU
  * \version 0.1
  * \date 16 octobre 2019
  */
@@ -61,7 +61,9 @@
  };
  typedef struct luffy_s luffy_t;
 
-
+ /**
+ * \brief Structure de la map
+ */
 struct map_s {
     SDL_Texture*tiles;
     char**tab2D;
@@ -70,43 +72,18 @@ struct map_s {
     SDL_Renderer* rend;
     const char* nomMap;//nom de la map
     luffy_t* luffy;
-    //Liste_t*listBf;
-
+    
 };
 typedef struct map_s map_t;
- /**
- * \brief Structure du world
- */
- /**
- * \brief Structure du world
- */
-/*struct luffy_s{
-    int vie;//vie de luffy
-    int map;//map sur laquelle est luffy
 
-};
-typedef struct world_s world_t;*/
 
-//map
-typedef unsigned char tileindex; 
  
-typedef struct 
-{ 
-    SDL_Rect R; 
-    int plein; 
-} TileProp; 
 
-typedef struct 
-{ 
-    int LARGEUR_TILE,HAUTEUR_TILE; 
-    int nbtilesX,nbtilesY; 
-    SDL_Surface* tileset; 
-    TileProp* props; 
-    tileindex** schema; 
-    int nbtiles_largeur_monde,nbtiles_hauteur_monde; 
-} Map;
-
-
+ /**
+ * \brief Charement image avec un nom de fichier en paramètre
+ * \param path nom du fichier
+ * \return SDL_Surfac* image
+ */
 SDL_Surface* load_image(char path[]);
 
 

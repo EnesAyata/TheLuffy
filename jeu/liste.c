@@ -1,4 +1,3 @@
-
 #include "liste.h"
 
 
@@ -31,18 +30,7 @@ void insertion(Liste_t *liste,perso_t*aAjout){//ajouter en param tout ce qu'il y
     }
 }
 
-perso_t* creeEntite(SDL_Rect src,SDL_Rect dest,SDL_Texture*text,int vie,int deplacement){
-    perso_t *nouveau = malloc(sizeof(perso_t));
-    nouveau->src=src;
-    nouveau->dest=dest;
-    nouveau->sprite=text;
-    nouveau->vie=vie;
-    nouveau->precedent=NULL;
-    nouveau->suivant=NULL;
-    nouveau->est_affiche=0;
-    nouveau->deplacement=deplacement;
-    return nouveau;
-}
+
 
 void supprimer(Liste_t*liste,perso_t* asupp){
     if (liste == NULL)
@@ -109,6 +97,19 @@ void animation_feu(perso_t* perso){
   Uint32 seconds = ticks / 100;
   Uint32 sprite = seconds % 4;
  perso->src.x=sprite*25;
+}
+
+perso_t* creeEntite(SDL_Rect src,SDL_Rect dest,SDL_Texture*text,int vie,int deplacement){
+    perso_t *nouveau = malloc(sizeof(perso_t));
+    nouveau->src=src;
+    nouveau->dest=dest;
+    nouveau->sprite=text;
+    nouveau->vie=vie;
+    nouveau->precedent=NULL;
+    nouveau->suivant=NULL;
+    nouveau->est_affiche=0;
+    nouveau->deplacement=deplacement;
+    return nouveau;
 }
 
 void NewBouleFeu(Liste_t* list,SDL_Rect*luffy,SDL_Renderer* rend,luffy_t*luffyPerso){
@@ -240,9 +241,9 @@ void gestion_mst(mst_t*mst1,mst_t*mst2,mst_t*mst3,mst_t*mst4,SDL_Renderer*rend,S
                 perso->argent+=5;
                 perso->experience+=10;
                 mst1->est_affiche=1;
-                printf("iL Y A CONTACT");
+                
               }
-              else{mst1->vie-=1;printf("iL Y A CONTACT");}
+              else{mst1->vie-=1;}
             }
             
             if(check_colli(sprite,mst2->dest)){
@@ -250,9 +251,9 @@ void gestion_mst(mst_t*mst1,mst_t*mst2,mst_t*mst3,mst_t*mst4,SDL_Renderer*rend,S
                 perso->argent+=5;
                 perso->experience+=10;
                 mst2->est_affiche=1;
-                printf("iL Y A CONTACT");
+                
               }
-              else{mst2->vie-=1;printf("iL Y A CONTACT");}
+              else{mst2->vie-=1;}
             }
             
             if(check_colli(sprite,mst3->dest)){
@@ -262,7 +263,7 @@ void gestion_mst(mst_t*mst1,mst_t*mst2,mst_t*mst3,mst_t*mst4,SDL_Renderer*rend,S
                 mst3->est_affiche=1;
                 
               }
-              else{mst3->vie-=1; printf("iL Y A CONTACT");}
+              else{mst3->vie-=1; }
             }
             
             if(check_colli(sprite,mst4->dest)){
@@ -270,7 +271,7 @@ void gestion_mst(mst_t*mst1,mst_t*mst2,mst_t*mst3,mst_t*mst4,SDL_Renderer*rend,S
                 perso->argent+=5;
                 perso->experience+=10;
                 mst4->est_affiche=1;
-                printf("iL Y A CONTACT");
+                
                 }
                 
                 else{mst4->vie-=1;}

@@ -1,3 +1,12 @@
+/**
+ * \file world.h
+ * \brief fichier header du monde pricipal
+ * \author Enes AYATA / Alpaslan GEBESOGLU
+ * \version 0.1
+ * \date 14 décembre 2019
+ */
+
+
 #ifndef COLLISION_H
 #define COLLISION_H
 #include "menu.h"
