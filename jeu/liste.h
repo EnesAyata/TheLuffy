@@ -44,7 +44,7 @@ void animation_ennemi_map(SDL_Rect*dest,SDL_Rect*src,SDL_Renderer* rend,SDL_Text
 void animation_ennemi_map_deux(SDL_Rect*dest,SDL_Rect*src,SDL_Renderer* rend,SDL_Texture* text);
 void animation_ennemi_map_trois(SDL_Rect*dest,SDL_Rect*src,SDL_Renderer* rend,SDL_Texture* text);
 void animation_ennemi_map_quatre(SDL_Rect*dest,SDL_Rect*src,SDL_Renderer* rend,SDL_Texture* text);
-void gestion_mst(mst_t*mst1,mst_t*mst2,mst_t*mst3,mst_t*mst4,SDL_Renderer*rend,SDL_Texture* monstre,Liste_t*listBf,luffy_t*perso);
+void gestion_mst(mst_t*mst1,mst_t*mst2,mst_t*mst3,mst_t*mst4,SDL_Renderer*rend,SDL_Texture* monstre,Liste_t*listBf,luffy_t*perso, SDL_Rect luffy);
 void freeList(Liste_t*listBf);
 void colli_perso(SDL_Rect a, SDL_Rect b);
 void ecriture_score(Liste_t*list,luffy_t*luffy);
