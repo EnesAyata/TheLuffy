@@ -13,7 +13,7 @@ Liste_t *initialisation()
     return liste;
 }
 
-void insertion(Liste_t *liste,perso_t*aAjout){//ajouter en param tout ce qu'il y aura dans le struct mob
+void insertion(Liste_t *liste,perso_t*aAjout){
     if (liste == NULL )
     {
         exit(EXIT_FAILURE);
@@ -227,13 +227,8 @@ void gestion_mst(mst_t*mst1,mst_t*mst2,mst_t*mst3,mst_t*mst4,SDL_Renderer*rend,S
               }
               else{mst4->vie-=1;
             }
-
-            
-            
-
           } 
           actuel=actuel->suivant;
-
         }
         }
         if(check_colli(sprite,mst1->dest)){
@@ -278,9 +273,6 @@ void gestion_mst(mst_t*mst1,mst_t*mst2,mst_t*mst3,mst_t*mst4,SDL_Renderer*rend,S
             }
         
 }
-
-
-
 void ecriture_score(Liste_t*list,luffy_t*luffy){
     FILE* fichier = NULL;
  
@@ -288,14 +280,18 @@ void ecriture_score(Liste_t*list,luffy_t*luffy){
  
     if (fichier != NULL)
     {
- 
         // On l'écrit dans le fichier
         fputs("SCORE DU JOUEUR POUR TheLuffy : \n",fichier);
         fprintf(fichier, "Vous avez utilisé %d boules de feu pour venir à bout des ennemis", list->lenght);
         fprintf(fichier,"Vous avez %d argent et %d experience \n",luffy->argent,luffy->experience);
         fprintf(fichier,"Vous avez fini le jeu avec %d de point de vie.\n ",luffy->vie);
         fclose(fichier);
-    }
- 
-    
+    }  
+}
+
+void free_mst(mst_t* mst1,mst_t* mst2,mst_t* mst3,mst_t* mst4){
+    free(mst1);
+    free(mst2);
+    free(mst3);
+    free(mst4);
 }

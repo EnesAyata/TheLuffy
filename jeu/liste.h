@@ -175,6 +175,9 @@ void colli_perso(SDL_Rect a, SDL_Rect b);
 void ecriture_score(Liste_t*list,luffy_t*luffy);
 
 
+void free_mst(mst_t* mst1,mst_t* mst2,mst_t* mst3,mst_t* mst4);
+
+
 /**
  * \brief création d'une entité de boule de feu
  * \param src SDL_Rect source

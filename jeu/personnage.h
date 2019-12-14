@@ -40,6 +40,7 @@ void desallouer_perso(luffy_t* perso);
  * \param perso perso initialisé
  */
 void afficherL(luffy_t *perso);
+void remplir_rect(SDL_Rect*A,SDL_Rect*B,SDL_Rect*C,SDL_Rect*D,SDL_Rect*AA,SDL_Rect*BB,SDL_Rect*CC,SDL_Rect*DD);
 
 
 

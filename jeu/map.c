@@ -1,12 +1,12 @@
 #include "map.h"
 
-map_t* cree_map(char** tab2D,SDL_Renderer* rend,luffy_t*luffy,SDL_Texture*tiles,const char* nomMap){
+map_t* cree_map(char** tab2D,SDL_Renderer* rend,luffy_t*luffy,SDL_Texture*tiles,const char* nomMap,SDL_Texture*luffyP){
 map_t*map= malloc(sizeof(map_t));
 int n,m;
 taille_fichier(nomMap,&n,&m);
 map->col=n;
 map->lig=m;
-map->luffy=luffy;
+map->luffy=luffyP;
 map->tab2D=tab2D;
 map->tiles=tiles;
 map->nomMap=nomMap;

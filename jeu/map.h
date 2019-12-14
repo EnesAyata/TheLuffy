@@ -57,10 +57,10 @@ void afficher_map(char** tab,int n,int m,SDL_Renderer* rend,SDL_Texture* tiles);
  * \param tiles texture des tiles
  * \param luffy struct du perso principal
  * \param nomMap nom du fichier txt
+ * \param luffyP texture de luffy
  * \return une structure map_t représentant la map
 */
-map_t* cree_map(char** tab2D,SDL_Renderer* rend,luffy_t*luffy,SDL_Texture*tiles,const char* nomMap);
-
+map_t* cree_map(char** tab2D,SDL_Renderer* rend,luffy_t*luffy,SDL_Texture*tiles,const char* nomMap,SDL_Texture*luffyP);
 /**
  * \brief affichage de la map par rapport à la structure map
  * \param map structure de la map
