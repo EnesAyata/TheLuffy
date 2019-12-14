@@ -248,7 +248,7 @@ char** tab2DDeplacement;
       afficher_map_struct(map1,rend,luffy);//,"level.txt");
       detection_porte(tab2DMap1,&DestL,perso,&n,&m); 
       
-      gestion_mst(map1_mst1,map1_mst2,map1_mst3,map1_mst4,rend,monstre,listBf,perso);
+      gestion_mst(map1_mst1,map1_mst2,map1_mst3,map1_mst4,rend,monstre,listBf,perso,DestL);
       atk_luffy(listBf,rend,perso);
       }
     else if(perso->map==2){
@@ -256,21 +256,21 @@ char** tab2DDeplacement;
         tab2DDeplacement=tab2DMap2;
         afficher_map_struct(map2,rend,luffy);//,"level.txt");
         detection_porte(tab2DMap2,&DestL,perso,&n,&m); 
-        gestion_mst(map2_mst1,map2_mst2,map2_mst3,map2_mst4,rend,monstre_deux,listBf,perso);
+        gestion_mst(map2_mst1,map2_mst2,map2_mst3,map2_mst4,rend,monstre_deux,listBf,perso,DestL);
         atk_luffy(listBf,rend,perso);
       }
       else if(perso->map==3){
         tab2DDeplacement=tab2DMap3;
         afficher_map_struct(map3,rend,luffy);//,"level.txt");
         detection_porte(tab2DMap3,&DestL,perso,&n,&m);  
-        gestion_mst(map3_mst1,map3_mst2,map3_mst3,map3_mst4,rend,monstre_trois,listBf,perso);
+        gestion_mst(map3_mst1,map3_mst2,map3_mst3,map3_mst4,rend,monstre_trois,listBf,perso, DestL);
         atk_luffy(listBf,rend,perso);
       }
       else if(perso->map==4){
         tab2DDeplacement=tab2DMap4;
         afficher_map_struct(map4,rend,luffy);//,"level.txt");
         detection_porte(tab2DMap4,&DestL,perso,&n,&m);  
-        gestion_mst(map4_mst1,map4_mst2,map4_mst3,map4_mst4,rend,monstre_quatre,listBf,perso);
+        gestion_mst(map4_mst1,map4_mst2,map4_mst3,map4_mst4,rend,monstre_quatre,listBf,perso, DestL);
         atk_luffy(listBf,rend,perso);
       }
 

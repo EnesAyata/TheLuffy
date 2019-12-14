@@ -172,7 +172,7 @@ void animation_ennemi_map_quatre(SDL_Rect*dest,SDL_Rect*src,SDL_Renderer* rend,S
         deplacement_ennemis_quatre(dest,src);
         animation_ennemis(src);
 } 
-void gestion_mst(mst_t*mst1,mst_t*mst2,mst_t*mst3,mst_t*mst4,SDL_Renderer*rend,SDL_Texture* monstre,Liste_t* listBf,luffy_t*perso){
+void gestion_mst(mst_t*mst1,mst_t*mst2,mst_t*mst3,mst_t*mst4,SDL_Renderer*rend,SDL_Texture* monstre,Liste_t* listBf,luffy_t*perso, SDL_Rect sprite){
     if(mst1->est_affiche==0){
         SDL_RenderCopy(rend,monstre,&mst1->src,&mst1->dest);
         animation_ennemi_map(&mst1->dest,&mst1->src,rend,monstre);
@@ -195,7 +195,7 @@ void gestion_mst(mst_t*mst1,mst_t*mst2,mst_t*mst3,mst_t*mst4,SDL_Renderer*rend,S
         for(int i=0;i<listBf->lenght;i++){
           if(actuel!=NULL){
             if(check_colli(actuel->dest,mst1->dest) && actuel->est_affiche==0){
-              if(mst1->vie<0 && mst2->est_affiche==0){
+              if(mst1->vie<0 ){
                 perso->argent+=5;
                 perso->experience+=10;
                 mst1->est_affiche=1;
@@ -203,7 +203,7 @@ void gestion_mst(mst_t*mst1,mst_t*mst2,mst_t*mst3,mst_t*mst4,SDL_Renderer*rend,S
               else{mst1->vie-=1;}
             }
             if(check_colli(actuel->dest,mst2->dest) && actuel->est_affiche==0){
-              if(mst2->vie<0 && mst2->est_affiche==0){
+              if(mst2->vie<0 ){
                 perso->argent+=5;
                 perso->experience+=10;
                 mst2->est_affiche=1;
@@ -211,7 +211,7 @@ void gestion_mst(mst_t*mst1,mst_t*mst2,mst_t*mst3,mst_t*mst4,SDL_Renderer*rend,S
               else{mst2->vie-=1;}
             }
             if(check_colli(actuel->dest,mst3->dest) && actuel->est_affiche==0){
-             if(mst3->vie<0 && mst3->est_affiche==0){
+             if(mst3->vie<0 ){
                 perso->argent+=5;
                 perso->experience+=10;
                 mst3->est_affiche=1;
@@ -219,13 +219,55 @@ void gestion_mst(mst_t*mst1,mst_t*mst2,mst_t*mst3,mst_t*mst4,SDL_Renderer*rend,S
               else{mst3->vie-=1;}
             }
             if(check_colli(actuel->dest,mst4->dest) && actuel->est_affiche==0){
-              if(mst4->vie<0 && mst4->est_affiche==0){
+              if(mst4->vie<0 ){
                 perso->argent+=5;
                 perso->experience+=10;
                 mst4->est_affiche=1;
               }
-              else{mst4->vie-=1;}
+              else{mst4->vie-=1; printf("iL Y A CONTACT");}
             }
+            if(check_colli(sprite,mst1->dest)){
+                if(mst1->vie<0 ){
+                perso->argent+=5;
+                perso->experience+=10;
+                mst1->est_affiche=1;
+                printf("iL Y A CONTACT");
+              }
+              else{mst1->vie-=1;printf("iL Y A CONTACT");}
+            }
+            
+            if(check_colli(sprite,mst2->dest)){
+                if(mst2->vie<0 ){
+                perso->argent+=5;
+                perso->experience+=10;
+                mst2->est_affiche=1;
+                printf("iL Y A CONTACT");
+              }
+              else{mst2->vie-=1;printf("iL Y A CONTACT");}
+            }
+            
+            if(check_colli(sprite,mst3->dest)){
+                if(mst3->vie<0 ){
+                perso->argent+=5;
+                perso->experience+=10;
+                mst3->est_affiche=1;
+                
+              }
+              else{mst3->vie-=1; printf("iL Y A CONTACT");}
+            }
+            
+            if(check_colli(sprite,mst4->dest)){
+                if(mst4->vie<0 ){
+                perso->argent+=5;
+                perso->experience+=10;
+                mst4->est_affiche=1;
+                printf("iL Y A CONTACT");
+                }
+                
+                else{mst4->vie-=1;}
+            }
+            
+
           } 
           actuel=actuel->suivant;
 
