@@ -109,32 +109,41 @@ char** tab2DDeplacement;
     if(perso->map==1){
       tab2DDeplacement=tab2DMap1;
       afficher_map_struct(map1,rend,luffy);
-      detection_porte(tab2DMap1,&DestL,perso,&n,&m); 
+      if(map1_mst1->est_affiche==1 && map1_mst2->est_affiche==1 && map1_mst3->est_affiche==1 && map1_mst4->est_affiche==1){
+          detection_porte(tab2DMap1,&DestL,perso,&n,&m);
+        } 
       gestion_mst(map1_mst1,map1_mst2,map1_mst3,map1_mst4,rend,monstre,listBf,perso,DestL);
       atk_luffy(listBf,rend,perso);
       }
     else if(perso->map==2){
         tab2DDeplacement=tab2DMap2;
         afficher_map_struct(map2,rend,luffy);
-        detection_porte(tab2DMap2,&DestL,perso,&n,&m); 
+        if(map2_mst1->est_affiche==1 && map2_mst2->est_affiche==1 && map2_mst3->est_affiche==1 && map2_mst4->est_affiche==1){
+          detection_porte(tab2DMap2,&DestL,perso,&n,&m);
+        } 
         gestion_mst(map2_mst1,map2_mst2,map2_mst3,map2_mst4,rend,monstre_deux,listBf,perso,DestL);
         atk_luffy(listBf,rend,perso);
       }
       else if(perso->map==3){
         tab2DDeplacement=tab2DMap3;
         afficher_map_struct(map3,rend,luffy);
-        detection_porte(tab2DMap3,&DestL,perso,&n,&m);  
+        if(map3_mst1->est_affiche==1 && map3_mst2->est_affiche==1 && map3_mst3->est_affiche==1 && map3_mst4->est_affiche==1){
+          detection_porte(tab2DMap3,&DestL,perso,&n,&m);
+        }
         gestion_mst(map3_mst1,map3_mst2,map3_mst3,map3_mst4,rend,monstre_trois,listBf,perso, DestL);
         atk_luffy(listBf,rend,perso);
       }
       else if(perso->map==4){
         tab2DDeplacement=tab2DMap4;
         afficher_map_struct(map4,rend,luffy);
-        detection_porte(tab2DMap4,&DestL,perso,&n,&m);  
+        if(map4_mst1->est_affiche==1 && map4_mst2->est_affiche==1 && map4_mst3->est_affiche==1 && map4_mst4->est_affiche==1){
+          detection_porte(tab2DMap4,&DestL,perso,&n,&m);
+        }    
         gestion_mst(map4_mst1,map4_mst2,map4_mst3,map4_mst4,rend,monstre_quatre,listBf,perso, DestL);
         atk_luffy(listBf,rend,perso);
         if(map4_mst1->est_affiche==1 && map4_mst2->est_affiche==1 && map4_mst3->est_affiche==1 && map4_mst4->est_affiche==1 && iecran_fin ==0){
-              iecran_fin=create_exit(font,rend);
+              ecriture_score(listBf,perso);
+              iecran_fin=create_exit(font,rend);     
         }
       }
     SDL_RenderCopy(rend,luffy,&luffyR,&DestL);
