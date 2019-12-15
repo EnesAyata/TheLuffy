@@ -156,7 +156,6 @@ char** tab2DDeplacement;
       switch(evenements.key.keysym.sym)
   {
     case SDLK_ESCAPE:
-    printf("%d",imenu);
     if(imenu==2){
       imenu=createmenu(font,rend);
     }break;
